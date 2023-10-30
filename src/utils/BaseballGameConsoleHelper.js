@@ -17,7 +17,7 @@ class BaseballGameConsoleHelper {
   }
 
   isValidNumbers(guessedNumbers) {
-    if (guessedNumbers.length !== 3) {
+    if (this.isThreeLetters(guessedNumbers)) {
       return false;
     }
 
@@ -31,7 +31,18 @@ class BaseballGameConsoleHelper {
     return true;
   }
 
+  isThreeLetters(guessedNumbers) {
+    return guessedNumbers.length !== 3;
+  }
 
+  printNothing() {
+    Console.print('낫싱');
+  }
+
+  printThreeStrikes() {
+    Console.print('3스트라이크');
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  }
 }
 
 export default BaseballGameConsoleHelper;

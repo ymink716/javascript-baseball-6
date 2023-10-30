@@ -1,12 +1,17 @@
 class Player {
   constructor() {
     this.guessedNumbers = [];
-    this.strikes = 0;
-    this.balls = 0;
+    this.strike = 0;
+    this.ball = 0;
   }
 
-  submitGuessNumbers() {
+  setGuessNumbers(guessedNumbers) {
+    this.guessedNumbers = guessedNumbers;
+  }
 
+  recievreceiveResult(strike, ball) {
+    this.strike = strike;
+    this.ball = ball;
   }
 }
 

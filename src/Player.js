@@ -1,11 +1,13 @@
 class Player {
   constructor() {
     this.guessNumbers = [];
-    this.strike = 0;
-    this.ball = 0;
+    this.strikes = 0;
+    this.balls = 0;
   }
 
   submitGuessNumbers() {
-    
+
   }
 }
+
+export default Player;

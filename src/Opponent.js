@@ -4,11 +4,13 @@ class Opponent {
     this.answerNumbers = [];
   }
 
-  giveAnswerNumbers() {
-    
+  async giveAnswerNumbers() {
+
   }
 
   checkNumbers() {
 
   }
 }
+
+export default Opponent;

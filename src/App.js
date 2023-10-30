@@ -1,6 +1,12 @@
+import BaseballGameClient from './BaseballGameClient.js';
+
 class App {
+  constructor() {
+    this.baseballGameClient = new BaseballGameClient();
+  }
+  
   async play() {
-    console.log('play');
+    await this.baseballGameClient.playBaseballGame();
   }
 }
 

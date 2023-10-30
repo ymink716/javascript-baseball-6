@@ -1,5 +1,5 @@
 import App from './src/App.js';
 
-const app = new App();
+const app = await new App();
 
 app.play();

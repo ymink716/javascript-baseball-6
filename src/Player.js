@@ -1,6 +1,6 @@
 class Player {
   constructor() {
-    this.guessNumbers = [];
+    this.guessedNumbers = [];
     this.strikes = 0;
     this.balls = 0;
   }

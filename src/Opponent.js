@@ -1,15 +1,17 @@
+import { Random } from '@woowacourse/mission-utils';
+
 class Opponent {
 
   constructor() {
     this.answerNumbers = [];
   }
 
-  async giveAnswerNumbers() {
-
+  async prepareAnswerNumbers() {
+    this.answerNumbers = await Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
-  checkNumbers() {
-
+  async checkNumbers() {
+    
   }
 }
 

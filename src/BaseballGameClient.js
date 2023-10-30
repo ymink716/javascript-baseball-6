@@ -1,16 +1,14 @@
-import { Console } from '@woowacourse/mission-utils';
-import Oppernent from './Opponent.js';
-import Player from './Player.js';
+import BaseballGameConsoleHelper from './utils/BaseballGameConsoleHelper.js';
+import BaseballGameService from './BaseballGameService.js';
 
 class BaseballGameClient {
   constructor() {
-    this.opponent = new Oppernent();
-    this.player = new Player();
+    this.consoleHelper = new BaseballGameConsoleHelper();
+    this.baseballGameService = new BaseballGameService();
   }
 
   async playBaseballGame() {
-    Console.print('숫자 야구 게임을 시작합니다.');
-    await this.opponent.giveAnswerNumbers();
+    await startBaseballGame();
 
     let userInput;
 
@@ -38,6 +36,11 @@ class BaseballGameClient {
         Console.print(`${this.player.balls}볼 ${this.player.strikes}스트라이크`);
       }
     }
+  }
+
+  async startBaseballGame() {
+    consoleHelper.printStartBaseballGame();
+    await this.baseballGameService.prepareAnswerNumbers();
   }
 }
 

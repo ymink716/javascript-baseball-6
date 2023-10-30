@@ -18,9 +18,8 @@ class BaseballGameClient {
       await this.printComparedResult(strike, ball);
       
       if (this.isThreeStrikes(strike, ball)) {
-        await this.askStartNewGameOrQuit();
+        await this.startNewGameOrQuit();
       }
-
     }
   }
 
@@ -40,7 +39,16 @@ class BaseballGameClient {
     }
   }
 
+  async startNewGameOrQuit() {
+    const input = await this.consoleHelper.askStartNewGameOrQuit();
 
+    if (input === '1') {
+      await this.baseballGameService.prepareAnswerNumbers();
+      return;
+    }
+    
+    this.isInProgress = false;
+  }
 
   isNothing(strike, ball) {
     return strike === 0 && ball === 0;

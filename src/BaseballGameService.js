@@ -24,7 +24,16 @@ class BaseballGameService {
     this.opponent.showComparedResult(strike, ball);
   }
 
+  async startNewGameOrQuit() {
+    const choice = await this.opponent.askStartNewGameOrQuit();
 
+    if (choice === '1') {
+      await this.baseballGameService.prepareAnswerNumbers();
+      return true;
+    }
+    
+    return false;
+  }
 }
 
 export default BaseballGameService;

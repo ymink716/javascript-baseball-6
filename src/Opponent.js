@@ -56,6 +56,20 @@ class Opponent {
   isThreeStrikes(strike, ball) {
     return strike === 3 && ball === 0;
   }
+
+  async askStartNewGameOrQuit() {
+    const choice = await this.consoleHelper.askStartNewGameOrQuit();
+
+    if (!this.isStartOrQuitOptions(input)) {
+      throw Error('잘못된 값을 입력하셨습니다.');
+    }
+
+    return choice;
+  }
+
+  isStartOrQuitOptions(input) {
+    return input in ['1', '2'];
+  }
 }
 
 export default Opponent;

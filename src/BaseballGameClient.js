@@ -15,21 +15,14 @@ class BaseballGameClient {
       const { strike, ball } = this.baseballGameService.compareToAnswers(guessdNumbers);
       this.baseballGameService.showComparedResult(strike, ball);
       
-      if (this.isThreeStrikes(strike, ball)) {
-        await this.startNewGameOrQuit();
+      if (this.isCorrect(strike, ball)) {
+        this.isInProgress = await this.baseballGameService.startNewGameOrQuit();
       }
     }
   }
 
-  async startNewGameOrQuit() {
-    const input = await this.consoleHelper.askStartNewGameOrQuit();
-
-    if (input === '1') {
-      await this.baseballGameService.prepareAnswerNumbers();
-      return;
-    }
-    
-    this.isInProgress = false;
+  isCorrect(strike, ball) {
+    return strike === 3 && ball === 0;
   }
 }
 

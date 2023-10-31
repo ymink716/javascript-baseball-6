@@ -11,25 +11,13 @@ class BaseballGameClient {
     this.isInProgress = true;
 
     while (this.isInProgress) {
-      await this.baseballGameService.guessNumbers();
-      
-      this.baseballGameService.compareToAnswers();
-      
-      await this.printComparedResult(strike, ball);
+      const guessdNumbers = await this.baseballGameService.guessNumbers();
+      const { strike, ball } = this.baseballGameService.compareToAnswers(guessdNumbers);
+      this.baseballGameService.showComparedResult(strike, ball);
       
       if (this.isThreeStrikes(strike, ball)) {
         await this.startNewGameOrQuit();
       }
-    }
-  }
-
-  async printComparedResult(strike, ball) {
-    if (this.isNothing(strike, ball)) {
-      this.consoleHelper.printNothing();
-    } else if (this.isThreeStrikes(strike, ball)) {
-      this.consoleHelper.printThreeStrikes();
-    } else {
-      this.consoleHelper.printBallAndStrike(ball, strike);
     }
   }
 
@@ -42,14 +30,6 @@ class BaseballGameClient {
     }
     
     this.isInProgress = false;
-  }
-
-  isNothing(strike, ball) {
-    return strike === 0 && ball === 0;
-  }
-
-  isThreeStrikes(strike, ball) {
-    return strike === 3 && ball === 0;
   }
 }
 

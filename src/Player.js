@@ -3,9 +3,6 @@ import PlayerConsoleHelper from './utils/PlayerConsoleHelper.js';
 class Player {
   constructor() {
     this.consoleHelper = new PlayerConsoleHelper();
-    this.guessedNumbers = [];
-    this.strike = 0;
-    this.ball = 0;
   }
 
   async guessNumbers() {
@@ -16,7 +13,8 @@ class Player {
     }
 
     guessedNumbers = guessedNumbers.map(Number);
-    this.guessedNumbers = guessedNumbers;
+    
+    return guessedNumbers;
   }
 
   isInvalidNumbers(guessedNumbers) {
@@ -56,12 +54,6 @@ class Player {
     }
 
     return false;
-  }
-
-
-  receiveResult(strike, ball) {
-    this.strike = strike;
-    this.ball = ball;
   }
 }
 

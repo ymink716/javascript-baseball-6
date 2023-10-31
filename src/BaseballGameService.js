@@ -13,17 +13,15 @@ class BaseballGameService {
   }
 
   async guessNumbers() {
-    await this.player.guessNumbers();
+    return await this.player.guessNumbers();
   }
 
-  compareToAnswers() {
-    const { strike, ball } = this.opponent.compareToAnswers(guessedNumbers);
-    this.player.receiveResult(strike, ball);
+  async compareToAnswers(guessedNumbers) {
+    return this.opponent.compareToAnswers(guessedNumbers);
+  }
 
-    return { 
-      strike: this.player.strike, 
-      ball: this.player.ball 
-    };
+  showComparedResult(strike, ball) {
+    this.opponent.showComparedResult(strike, ball);
   }
 
 

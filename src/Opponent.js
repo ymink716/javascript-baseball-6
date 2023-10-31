@@ -2,7 +2,6 @@ import OpponentConsoleHelper from './utils/OpponentConsoleHelper.js';
 import { Random } from '@woowacourse/mission-utils';
 
 class Opponent {
-
   constructor() {
     this.consoleHelper = new OpponentConsoleHelper();
     this.answerNumbers = [];
@@ -38,6 +37,24 @@ class Opponent {
 
   isBall(guess) {
     return this.answerNumbers.includes(guess);
+  }
+
+  showComparedResult(strike, ball) {
+    if (this.isNothing(strike, ball)) {
+      this.consoleHelper.printNothing();
+    } else if (this.isThreeStrikes(strike, ball)) {
+      this.consoleHelper.printThreeStrikes();
+    } else {
+      this.consoleHelper.printBallAndStrike(ball, strike);
+    }
+  }
+
+  isNothing(strike, ball) {
+    return strike === 0 && ball === 0;
+  }
+
+  isThreeStrikes(strike, ball) {
+    return strike === 3 && ball === 0;
   }
 }
 

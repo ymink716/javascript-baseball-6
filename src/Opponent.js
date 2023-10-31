@@ -1,5 +1,6 @@
 import OpponentConsoleHelper from './utils/OpponentConsoleHelper.js';
 import RandomNumberHelper from './utils/RandomNumberHelper.js';
+import { ERROR_MESSAGE } from './common/constants.js';
 
 class Opponent {
   constructor() {
@@ -63,7 +64,7 @@ class Opponent {
     const choice = await this.consoleHelper.askStartNewGameOrQuit();
 
     if (!this.isStartOrQuitOptions(choice)) {
-      throw Error('[ERROR]');
+      throw Error(ERROR_MESSAGE);
     }
 
     return choice;

@@ -1,5 +1,6 @@
 import Oppernent from './Opponent.js';
 import Player from './Player.js';
+import { CHOICE_START_NEW_GAME } from './common/constants.js';
 
 class BaseballGameService {
   constructor() {
@@ -27,7 +28,7 @@ class BaseballGameService {
   async startNewGameOrQuit() {
     const choice = await this.opponent.askStartNewGameOrQuit();
 
-    if (choice === '1') {
+    if (choice === CHOICE_START_NEW_GAME) {
       await this.opponent.prepareAnswerNumbers();
       return true;
     }

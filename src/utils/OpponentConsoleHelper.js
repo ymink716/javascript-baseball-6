@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { CLEER_GAME, NOTHING, START_OR_QUIT, THREE_STRIKE } from '../common/constants';
 
 class OpponentConsoleHelper {
   printStartBaseballGame() {
@@ -6,12 +7,12 @@ class OpponentConsoleHelper {
   }
 
   async printNothing() {
-    await Console.print('낫싱');
+    await Console.print(NOTHING);
   }
 
   async printThreeStrikes() {
-    await Console.print('3스트라이크');
-    await Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    await Console.print(THREE_STRIKE);
+    await Console.print(CLEER_GAME);
   }
 
   async printBallAndStrike(ball, strike) {
@@ -19,7 +20,7 @@ class OpponentConsoleHelper {
   }
 
   async askStartNewGameOrQuit() {
-    const input = await Console.readLineAsync('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    const input = await Console.readLineAsync(START_OR_QUIT);
 
     return input;
   }

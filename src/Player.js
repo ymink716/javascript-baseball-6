@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from './common/constants.js';
 import PlayerConsoleHelper from './utils/PlayerConsoleHelper.js';
 
 class Player {
@@ -9,7 +10,7 @@ class Player {
     let guessedNumbers = await this.consoleHelper.enterGuessedNumbers();
     
     if (!this.isValidNumbers(guessedNumbers)) {
-      throw Error('[ERROR]');
+      throw Error(ERROR_MESSAGE);
     }
 
     guessedNumbers = guessedNumbers.map(Number);

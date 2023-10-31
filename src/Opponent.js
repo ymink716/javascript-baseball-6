@@ -1,9 +1,10 @@
 import OpponentConsoleHelper from './utils/OpponentConsoleHelper.js';
-import { Random } from '@woowacourse/mission-utils';
+import RandomNumberHelper from './utils/RandomNumberHelper.js';
 
 class Opponent {
   constructor() {
     this.consoleHelper = new OpponentConsoleHelper();
+    this.randomNumberHelper = new RandomNumberHelper(); 
     this.answerNumbers = [];
   }
 
@@ -12,7 +13,8 @@ class Opponent {
   }
 
   async prepareAnswerNumbers() {
-    this.answerNumbers = await Random.pickUniqueNumbersInRange(1, 9, 3);
+    const numbers = this.randomNumberHelper.generateRandomNumbers(1, 9, 3);
+    this.answerNumbers = [...numbers];
     console.log(this.answerNumbers);
   }
 
@@ -61,7 +63,7 @@ class Opponent {
     const choice = await this.consoleHelper.askStartNewGameOrQuit();
 
     if (!this.isStartOrQuitOptions(choice)) {
-      throw Error('잘못된 값을 입력하셨습니다.');
+      throw Error('[ERROR]');
     }
 
     return choice;

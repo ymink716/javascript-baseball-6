@@ -9,7 +9,7 @@ class Player {
     let guessedNumbers = await this.consoleHelper.enterGuessedNumbers();
     
     if (!this.isValidNumbers(guessedNumbers)) {
-      throw Error('잘못된 값을 입력하셨습니다.');
+      throw Error('[ERROR]');
     }
 
     guessedNumbers = guessedNumbers.map(Number);

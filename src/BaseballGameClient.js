@@ -11,8 +11,9 @@ class BaseballGameClient {
     this.isInProgress = true;
 
     while (this.isInProgress) {
-      let guessedNumbers = await this.consoleHelper.enterGuessedNumbers();
-      const { strike, ball } = this.baseballGameService.compareToAnswers(guessedNumbers);
+      await this.baseballGameService.guessNumbers();
+      
+      this.baseballGameService.compareToAnswers();
       
       await this.printComparedResult(strike, ball);
       

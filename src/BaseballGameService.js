@@ -12,9 +12,11 @@ class BaseballGameService {
     await this.opponent.prepareAnswerNumbers();
   }
 
-  compareToAnswers(guessedNumbers) {
-    this.player.setGuessNumbers(guessedNumbers);
+  async guessNumbers() {
+    await this.player.guessNumbers();
+  }
 
+  compareToAnswers() {
     const { strike, ball } = this.opponent.compareToAnswers(guessedNumbers);
     this.player.receiveResult(strike, ball);
 

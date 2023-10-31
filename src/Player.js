@@ -1,3 +1,5 @@
+import BaseballGameConsoleHelper from './utils/PlayerConsoleHelper.js';
+
 class Player {
   constructor() {
     this.guessedNumbers = [];
@@ -9,7 +11,7 @@ class Player {
     this.guessedNumbers = guessedNumbers;
   }
 
-  recievreceiveResult(strike, ball) {
+  receiveResult(strike, ball) {
     this.strike = strike;
     this.ball = ball;
   }

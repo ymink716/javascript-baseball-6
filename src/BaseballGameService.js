@@ -7,14 +7,15 @@ class BaseballGameService {
     this.player = new Player();
   }
 
-  async prepareAnserNumbers() {
+  async startBaseballGame() {
+    this.opponent.showStartComment();
     await this.opponent.prepareAnswerNumbers();
   }
 
-  async compareToAnswers(guessedNumbers) {
+  compareToAnswers(guessedNumbers) {
     this.player.setGuessNumbers(guessedNumbers);
 
-    const { strike, ball } = await this.opponent.compareToAnswers(guessedNumbers);
+    const { strike, ball } = this.opponent.compareToAnswers(guessedNumbers);
     this.player.receiveResult(strike, ball);
 
     return { 

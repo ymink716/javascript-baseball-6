@@ -1,16 +1,23 @@
+import OpponentConsoleHelper from './utils/OpponentConsoleHelper.js';
 import { Random } from '@woowacourse/mission-utils';
 
 class Opponent {
 
   constructor() {
+    this.consoleHelper = new OpponentConsoleHelper();
     this.answerNumbers = [];
+  }
+
+  showStartComment() {
+    this.consoleHelper.printStartBaseballGame();
   }
 
   async prepareAnswerNumbers() {
     this.answerNumbers = await Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(this.answerNumbers);
   }
 
-  async compareToAnswers(guessedNumbers) {
+  compareToAnswers(guessedNumbers) {
     let strike = 0;
     let ball = 0;
 
@@ -30,7 +37,7 @@ class Opponent {
   }
 
   isBall(guess) {
-    return guess in this.answerNumbers;
+    return this.answerNumbers.includes(guess);
   }
 }
 

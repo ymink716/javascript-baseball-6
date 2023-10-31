@@ -17,10 +17,10 @@ class BaseballGameService {
   }
 
   async compareToAnswers(guessedNumbers) {
-    return this.opponent.compareToAnswers(guessedNumbers);
+    return await this.opponent.compareToAnswers(guessedNumbers);
   }
 
-  showComparedResult(strike, ball) {
+  async showComparedResult(strike, ball) {
     this.opponent.showComparedResult(strike, ball);
   }
 
@@ -28,7 +28,7 @@ class BaseballGameService {
     const choice = await this.opponent.askStartNewGameOrQuit();
 
     if (choice === '1') {
-      await this.baseballGameService.prepareAnswerNumbers();
+      await this.opponent.prepareAnswerNumbers();
       return true;
     }
     

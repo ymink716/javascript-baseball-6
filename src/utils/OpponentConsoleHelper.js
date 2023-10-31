@@ -5,17 +5,17 @@ class OpponentConsoleHelper {
     Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  printNothing() {
-    Console.print('낫싱');
+  async printNothing() {
+    await Console.print('낫싱');
   }
 
-  printThreeStrikes() {
-    Console.print('3스트라이크');
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  async printThreeStrikes() {
+    await Console.print('3스트라이크');
+    await Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
-  printBallAndStrike(ball, strike) {
-    Console.print(`${ball}볼 ${strike}스트라이크`);
+  async printBallAndStrike(ball, strike) {
+    await Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 
   async askStartNewGameOrQuit() {
@@ -25,4 +25,4 @@ class OpponentConsoleHelper {
   }
 }
 
-export default BaseballGameConsoleHelper;
+export default OpponentConsoleHelper;

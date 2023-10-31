@@ -16,7 +16,7 @@ class Opponent {
     console.log(this.answerNumbers);
   }
 
-  compareToAnswers(guessedNumbers) {
+  async compareToAnswers(guessedNumbers) {
     let strike = 0;
     let ball = 0;
 
@@ -39,7 +39,7 @@ class Opponent {
     return this.answerNumbers.includes(guess);
   }
 
-  showComparedResult(strike, ball) {
+  async showComparedResult(strike, ball) {
     if (this.isNothing(strike, ball)) {
       this.consoleHelper.printNothing();
     } else if (this.isThreeStrikes(strike, ball)) {
@@ -60,7 +60,7 @@ class Opponent {
   async askStartNewGameOrQuit() {
     const choice = await this.consoleHelper.askStartNewGameOrQuit();
 
-    if (!this.isStartOrQuitOptions(input)) {
+    if (!this.isStartOrQuitOptions(choice)) {
       throw Error('잘못된 값을 입력하셨습니다.');
     }
 
@@ -68,7 +68,7 @@ class Opponent {
   }
 
   isStartOrQuitOptions(input) {
-    return input in ['1', '2'];
+    return ['1', '2'].includes(input);
   }
 }
 

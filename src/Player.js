@@ -8,7 +8,7 @@ class Player {
   async guessNumbers() {
     let guessedNumbers = await this.consoleHelper.enterGuessedNumbers();
     
-    if (this.isInvalidNumbers(guessedNumbers)) {
+    if (!this.isValidNumbers(guessedNumbers)) {
       throw Error('잘못된 값을 입력하셨습니다.');
     }
 
@@ -17,43 +17,37 @@ class Player {
     return guessedNumbers;
   }
 
-  isInvalidNumbers(guessedNumbers) {
-    if (this.isNotThreeLetters(guessedNumbers)) {
+  isValidNumbers(guessedNumbers) {
+    if (this.isThreeLetters(guessedNumbers) && this.isNaturalNumber(guessedNumbers) && this.isUnique(guessedNumbers)) {
       return true;
     }
 
-    if(this.isNotNaturalNumber(guessedNumbers)) {
-      return true;
-    }
-
-    if(this.isDuplicated(guessedNumbers)) {
-      return true;
-    }
+    return false;
   }
 
-  isNotThreeLetters(guessedNumbers) {
-    return guessedNumbers.length !== 3;
+  isThreeLetters(guessedNumbers) {
+    return guessedNumbers.length === 3;
   }
 
-  isNotNaturalNumber(guessedNumbers) {
+  isNaturalNumber(guessedNumbers) {
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     guessedNumbers.forEach((num) => {
-      if (!num in numbers) {
-        return true;
+      if (!numbers.includes(num)) {
+        return false;
       }
     });
 
-    return false;
+    return true;
   }
 
-  isDuplicated(guessedNumbers) {
+  isUnique(guessedNumbers) {
     const [first, second, third] = guessedNumbers;
 
     if (first === second || second === third || third === first) {
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
 }
 

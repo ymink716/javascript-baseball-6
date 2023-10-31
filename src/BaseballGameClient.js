@@ -12,8 +12,8 @@ class BaseballGameClient {
 
     while (this.isInProgress) {
       const guessdNumbers = await this.baseballGameService.guessNumbers();
-      const { strike, ball } = this.baseballGameService.compareToAnswers(guessdNumbers);
-      this.baseballGameService.showComparedResult(strike, ball);
+      const { strike, ball } = await this.baseballGameService.compareToAnswers(guessdNumbers);
+      await this.baseballGameService.showComparedResult(strike, ball);
       
       if (this.isCorrect(strike, ball)) {
         this.isInProgress = await this.baseballGameService.startNewGameOrQuit();

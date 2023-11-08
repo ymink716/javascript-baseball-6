@@ -2,6 +2,8 @@ import { ERROR_MESSAGE } from '../common/constants.js';
 
 class Player {
   #currentGuessedNumbers = [];
+  #strikes = 0;
+  #balls = 0;
 
   guessNumbers(guessedNumbers) {    
     if (!this.#isValidNumbers(guessedNumbers)) {
@@ -44,7 +46,14 @@ class Player {
     return true;
   }
 
-  
+  showGuessedNumbers() {
+    return this.#currentGuessedNumbers;
+  }
+
+  receiveComparedResult(strikes, balls) {
+    this.#strikes = strikes;
+    this.#balls = balls;
+  }
 }
 
 export default Player;

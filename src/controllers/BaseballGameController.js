@@ -3,30 +3,33 @@ import Player from '../models/Player.js';
 import { CHOICE_START_NEW_GAME } from '../common/constants.js';
 import IntroView from '../views/IntroView.js';
 import GusessingNumbersView from '../views/GuessingNumbersView.js';
+import GuessResultsView from '../views/GuessResultsView.js';
 
 class BaseballGameController {
   #introView = new IntroView();
-  #guessingNumbersViwe = new GusessingNumbersView();
+  #guessingNumbersView = new GusessingNumbersView();
+  #GuessResultsView = new GuessResultsView();
   #opponent = new Oppernent();
   #player = new Player();
 
   async startBaseballGame() {
-    this.#introView.announceBeginning();
     await this.#opponent.prepareAnswerNumbers();
+    await this.#introView.announceBeginning();
   }
 
   async guessNumbers() {
-    const guessdNumbers = await this.#guessingNumbersViwe.enterGuessedNumbers();
+    const guessdNumbers = await this.#guessingNumbersView.enterGuessedNumbers();
     
     this.#player.guessNumbers(guessdNumbers);
   }
 
-  async compareToAnswers(guessedNumbers) {
-    return await this.opponent.compareToAnswers(guessedNumbers);
-  }
+  async showComparedResults() {
+    const guessdNumbers = this.#player.showGuessedNumbers();
+    
+    const { strikes, balls } = await this.#opponent.compareToAnswers(guessdNumbers);
+    this.#player.receiveComparedResult(strikes, balls);
 
-  async showComparedResult(strike, ball) {
-    this.opponent.showComparedResult(strike, ball);
+    this.#GuessResultsView.showComparedResult(strikes, balls);
   }
 
   async startNewGameOrQuit() {

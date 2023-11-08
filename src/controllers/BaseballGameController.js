@@ -24,17 +24,17 @@ class BaseballGameController {
     this.#player.guessNumbers(guessdNumbers);
   }
 
-  async showComparedResults() {
+  async showGuessResults() {
     const guessdNumbers = this.#player.showGuessedNumbers();
     
     const { strikes, balls } = await this.#opponent.compareToAnswers(guessdNumbers);
-    this.#player.receiveComparedResult(strikes, balls);
+    this.#player.receiveGuessResults(strikes, balls);
 
     this.#guessResultsView.showComparedResult(strikes, balls);
   }
 
   isAnswer() {
-    const { strikes, balls } = this.#player.showComparedResult();
+    const { strikes, balls } = this.#player.showGuessResults();
 
     return strikes === 3 && balls === 0;
   }

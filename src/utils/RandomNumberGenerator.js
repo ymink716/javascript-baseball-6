@@ -1,10 +1,10 @@
 import { Random } from '@woowacourse/mission-utils';
-import { COUNT, END_NUMBER, START_NUMBER } from '../common/constants.js';
+import { RANDOM_NUMBER_START, RANDOM_NUMBER_END, RANDOM_NUMBER_COUNT } from '../common/constants.js';
 
 class RandomNumberGenerator {
-  #start = START_NUMBER;
-  #end = END_NUMBER;
-  #count = COUNT;
+  #start = RANDOM_NUMBER_START;
+  #end = RANDOM_NUMBER_END;
+  #count = RANDOM_NUMBER_COUNT;
 
   generateRandomNumbers() {
     const numbers = [];

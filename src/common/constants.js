@@ -10,6 +10,6 @@ export const THREE_STRIKE = '3스트라이크';
 export const CLEER_GAME = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 export const START_OR_QUIT = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
 
-export const START_NUMBER = 1;
-export const END_NUMBER = 9;
-export const COUNT = 3;
+export const RANDOM_NUMBER_START = 1;
+export const RANDOM_NUMBER_END = 9;
+export const RANDOM_NUMBER_COUNT = 3;

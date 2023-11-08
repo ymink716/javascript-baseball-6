@@ -1,14 +1,14 @@
 import RandomNumberGenerator from '../utils/RandomNumberGenerator.js';
+import AnswerNumbers from './vo/AnswerNumbers.js';
 
 class Opponent {
   #randomNumberGenerator = new RandomNumberGenerator(); 
-  #answerNumbers = [];
-
+  #answerNumbers;
 
   async prepareAnswerNumbers() {
     const numbers = this.#randomNumberGenerator.generateRandomNumbers();
-    this.#answerNumbers = [ ...numbers ];
-    console.log(this.#answerNumbers);
+    this.#answerNumbers = new AnswerNumbers(numbers);
+    console.log(this.#answerNumbers.getAnswerNumbers());
   }
 
   async compareToAnswers(guessedNumbers) {
@@ -28,11 +28,12 @@ class Opponent {
   }
 
   #isStrike(guess, index) {
-    return guess === this.#answerNumbers[index];
+    return guess === this.#answerNumbers.getAnswerNumbers()[index];
   }
 
   #isBall(guess, index) {
-    return guess !== this.#answerNumbers[index] && this.#answerNumbers.includes(guess);
+    return guess !== this.#answerNumbers.getAnswerNumbers()[index] 
+      && this.#answerNumbers.getAnswerNumbers().includes(guess);
   }
 }
 

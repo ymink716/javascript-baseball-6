@@ -1,14 +1,15 @@
 import Oppernent from '../models/Opponent.js';
 import Player from '../models/Player.js';
-import { CHOICE_START_NEW_GAME } from '../common/constants.js';
 import IntroView from '../views/IntroView.js';
 import GusessingNumbersView from '../views/GuessingNumbersView.js';
 import GuessResultsView from '../views/GuessResultsView.js';
+import AskingRestartView from '../views/AskingRestartView.js';
 
 class BaseballGameController {
   #introView = new IntroView();
   #guessingNumbersView = new GusessingNumbersView();
-  #GuessResultsView = new GuessResultsView();
+  #guessResultsView = new GuessResultsView();
+  #askingRestartView = new AskingRestartView();
   #opponent = new Oppernent();
   #player = new Player();
 
@@ -29,18 +30,23 @@ class BaseballGameController {
     const { strikes, balls } = await this.#opponent.compareToAnswers(guessdNumbers);
     this.#player.receiveComparedResult(strikes, balls);
 
-    this.#GuessResultsView.showComparedResult(strikes, balls);
+    this.#guessResultsView.showComparedResult(strikes, balls);
   }
 
-  async startNewGameOrQuit() {
-    const choice = await this.opponent.askStartNewGameOrQuit();
+  isAnswer() {
+    const { strikes, balls } = this.#player.showComparedResult();
 
-    if (choice === CHOICE_START_NEW_GAME) {
-      await this.opponent.prepareAnswerNumbers();
-      return true;
-    }
-    
-    return false;
+    return strikes === 3 && balls === 0;
+  }
+
+  async askStartNewGame() {
+    const input = await this.#askingRestartView.askRestartOrQuit();
+
+    return this.#player.chooseRestartOrQuit(input);
+  }
+
+  async prepareNewGame() {
+    await this.#opponent.prepareAnswerNumbers();
   }
 }
 

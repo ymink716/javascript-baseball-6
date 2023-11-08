@@ -1,14 +1,12 @@
-import OpponentConsoleHelper from '../utils/OpponentConsoleHelper.js';
-import RandomNumberHelper from '../utils/RandomNumberHelper.js';
-import { ERROR_MESSAGE } from '../common/constants.js';
+import RandomNumberGenerator from '../utils/RandomNumberGenerator.js';
 
 class Opponent {
-  #randomNumberHelper = new RandomNumberHelper(); 
+  #randomNumberGenerator = new RandomNumberGenerator(); 
   #answerNumbers = [];
 
 
   async prepareAnswerNumbers() {
-    const numbers = this.#randomNumberHelper.generateRandomNumbers(1, 9, 3);
+    const numbers = this.#randomNumberGenerator.generateRandomNumbers();
     this.#answerNumbers = [ ...numbers ];
     console.log(this.#answerNumbers);
   }
@@ -21,7 +19,7 @@ class Opponent {
       if (this.#isStrike(number, index)) {
         strikes += 1;
       }
-      if (this.#isBall(number)) {
+      if (this.#isBall(number, index)) {
         balls += 1;
       }
     });
@@ -30,27 +28,11 @@ class Opponent {
   }
 
   #isStrike(guess, index) {
-    return guess === this.answerNumbers[index];
+    return guess === this.#answerNumbers[index];
   }
 
-  #isBall(guess) {
-    return this.answerNumbers.includes(guess);
-  }
-
-
-
-  async askStartNewGameOrQuit() {
-    const choice = await this.consoleHelper.askStartNewGameOrQuit();
-
-    if (!this.isStartOrQuitOptions(choice)) {
-      throw Error(ERROR_MESSAGE);
-    }
-
-    return choice;
-  }
-
-  isStartOrQuitOptions(input) {
-    return ['1', '2'].includes(input);
+  #isBall(guess, index) {
+    return guess !== this.#answerNumbers[index] && this.#answerNumbers.includes(guess);
   }
 }
 

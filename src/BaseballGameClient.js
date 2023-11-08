@@ -1,3 +1,4 @@
+import { CHOICE_START_NEW_GAME } from './common/constants.js';
 import BaseballGameController from './controllers/BaseballGameController.js';
 
 class BaseballGameClient {
@@ -6,24 +7,31 @@ class BaseballGameClient {
 
   async playBaseballGame() {
     await this.#baseballGameController.startBaseballGame();
-    this.#changeToStartingStatus();
+    this.#changeStartingStatus();
 
     while (this.#isInProgress) {
       await this.#baseballGameController.guessNumbers();
       await this.#baseballGameController.showComparedResults();
       
-      if (this.isCorrect(strike, ball)) {
-        this.isInProgress = await this.baseballGameService.startNewGameOrQuit();
+      if (this.#baseballGameController.isAnswer()) {
+        const choice = await this.#baseballGameController.askStartNewGame();
+        
+        if (choice === CHOICE_START_NEW_GAME) {
+          await this.#baseballGameController.prepareNewGame();
+          continue;
+        }
+
+        this.#changeEndStatus();
       }
     }
   }
 
-  #changeToStartingStatus() {
+  #changeStartingStatus() {
     this.#isInProgress = true;
   }
 
-  isCorrect(strike, ball) {
-    return strike === 3 && ball === 0;
+  #changeEndStatus() {
+    this.#isInProgress = false;
   }
 }
 

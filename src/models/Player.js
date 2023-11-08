@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../common/constants.js';
+import { ERROR_MESSAGE, CHOICE_START_NEW_GAME, CHOICE_QUIT } from '../common/constants.js';
 
 class Player {
   #currentGuessedNumbers = [];
@@ -27,6 +27,7 @@ class Player {
 
   #isNaturalNumber(guessedNumbers) {
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
     guessedNumbers.forEach((num) => {
       if (!numbers.includes(num)) {
         return false;
@@ -53,6 +54,29 @@ class Player {
   receiveComparedResult(strikes, balls) {
     this.#strikes = strikes;
     this.#balls = balls;
+  }
+
+  showComparedResult() {
+    return {
+      strikes: this.#strikes,
+      balls: this.#balls,
+    }
+  }
+
+  async chooseRestartOrQuit(choice) {
+    if (!this.#isStartOrQuitOptions(choice)) {
+      throw Error(ERROR_MESSAGE);
+    }
+
+    if (choice === CHOICE_START_NEW_GAME) {
+      return CHOICE_START_NEW_GAME;
+    }
+    
+    return CHOICE_QUIT;
+  }
+
+  #isStartOrQuitOptions(input) {
+    return ['1', '2'].includes(input);
   }
 }
 

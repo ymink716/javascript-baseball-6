@@ -12,12 +12,13 @@ class BaseballGameController {
 
   async startBaseballGame() {
     this.#introView.announceBeginning();
-    await this.opponent.prepareAnswerNumbers();
+    await this.#opponent.prepareAnswerNumbers();
   }
 
   async guessNumbers() {
-    const guessdNumbers = this.#guessingNumbersViwe.enterGuessedNumbers();
-    await this.player.guessNumbers();
+    const guessdNumbers = await this.#guessingNumbersViwe.enterGuessedNumbers();
+    
+    this.#player.guessNumbers(guessdNumbers);
   }
 
   async compareToAnswers(guessedNumbers) {

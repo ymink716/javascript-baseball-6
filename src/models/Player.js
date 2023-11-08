@@ -1,36 +1,29 @@
 import { ERROR_MESSAGE } from '../common/constants.js';
-import PlayerConsoleHelper from '../utils/PlayerConsoleHelper.js';
 
 class Player {
-  constructor() {
-    this.consoleHelper = new PlayerConsoleHelper();
-  }
+  #currentGuessedNumbers = [];
 
-  async guessNumbers() {
-    let guessedNumbers = await this.consoleHelper.enterGuessedNumbers();
-    
-    if (!this.isValidNumbers(guessedNumbers)) {
+  guessNumbers(guessedNumbers) {    
+    if (!this.#isValidNumbers(guessedNumbers)) {
       throw Error(ERROR_MESSAGE);
     }
 
-    guessedNumbers = guessedNumbers.map(Number);
-    
-    return guessedNumbers;
+    this.#currentGuessedNumbers = guessedNumbers.map(Number);
   }
 
-  isValidNumbers(guessedNumbers) {
-    if (this.isThreeLetters(guessedNumbers) && this.isNaturalNumber(guessedNumbers) && this.isUnique(guessedNumbers)) {
+  #isValidNumbers(guessedNumbers) {
+    if (this.#isThreeLetters(guessedNumbers) && this.#isNaturalNumber(guessedNumbers) && this.#isUnique(guessedNumbers)) {
       return true;
     }
 
     return false;
   }
 
-  isThreeLetters(guessedNumbers) {
+  #isThreeLetters(guessedNumbers) {
     return guessedNumbers.length === 3;
   }
 
-  isNaturalNumber(guessedNumbers) {
+  #isNaturalNumber(guessedNumbers) {
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     guessedNumbers.forEach((num) => {
       if (!numbers.includes(num)) {
@@ -41,7 +34,7 @@ class Player {
     return true;
   }
 
-  isUnique(guessedNumbers) {
+  #isUnique(guessedNumbers) {
     const [first, second, third] = guessedNumbers;
 
     if (first === second || second === third || third === first) {
@@ -50,6 +43,8 @@ class Player {
 
     return true;
   }
+
+  
 }
 
 export default Player;

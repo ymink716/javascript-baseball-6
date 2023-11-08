@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from "../../common/constants.js";
+
 class GuessedNumbers {
   #guessedNumbers;
 

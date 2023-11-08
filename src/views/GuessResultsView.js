@@ -20,12 +20,12 @@ class GuessResultsView {
     this.#printBallAndStrike(balls, strikes);
   }
 
-  #isNothing(strike, ball) {
-    return strike === 0 && ball === 0;
+  #isNothing(strikes, balls) {
+    return strikes === 0 && balls === 0;
   }
 
-  #isThreeStrikes(strike, ball) {
-    return strike === 3 && ball === 0;
+  #isThreeStrikes(strikes, balls) {
+    return strikes === 3 && balls === 0;
   }
 
   async #printNothing() {
@@ -37,8 +37,8 @@ class GuessResultsView {
     await Console.print(this.#CLEER_GAME);
   }
 
-  async #printBallAndStrike(ball, strike) {
-    await Console.print(`${ball}볼 ${strike}스트라이크`);
+  async #printBallAndStrike(balls, strikes) {
+    await Console.print(`${balls}볼 ${strikes}스트라이크`);
   }
 }
 

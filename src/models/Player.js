@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from './common/constants.js';
-import PlayerConsoleHelper from './utils/PlayerConsoleHelper.js';
+import { ERROR_MESSAGE } from '../common/constants.js';
+import PlayerConsoleHelper from '../utils/PlayerConsoleHelper.js';
 
 class Player {
   constructor() {

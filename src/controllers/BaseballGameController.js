@@ -1,15 +1,20 @@
-import Oppernent from './Opponent.js';
-import Player from './Player.js';
-import { CHOICE_START_NEW_GAME } from './common/constants.js';
+import Oppernent from '../models/Opponent.js';
+import Player from '../models/Player.js';
+import { CHOICE_START_NEW_GAME } from '../common/constants.js';
+import IntroView from '../views/IntroView.js';
 
-class BaseballGameService {
+class BaseballGameController {
+  #introView;
+  #opponent;
+
   constructor() {
-    this.opponent = new Oppernent();
+    this.#introView = new IntroView();
+    this.#opponent = new Oppernent();
     this.player = new Player();
   }
 
   async startBaseballGame() {
-    this.opponent.showStartComment();
+    this.#introView.announceBeginning();
     await this.opponent.prepareAnswerNumbers();
   }
 
@@ -37,4 +42,4 @@ class BaseballGameService {
   }
 }
 
-export default BaseballGameService;
+export default BaseballGameController;

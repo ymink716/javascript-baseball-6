@@ -1,16 +1,12 @@
-import OpponentConsoleHelper from './utils/OpponentConsoleHelper.js';
-import RandomNumberHelper from './utils/RandomNumberHelper.js';
-import { ERROR_MESSAGE } from './common/constants.js';
+import OpponentConsoleHelper from '../utils/OpponentConsoleHelper.js';
+import RandomNumberHelper from '../utils/RandomNumberHelper.js';
+import { ERROR_MESSAGE } from '../common/constants.js';
 
 class Opponent {
   constructor() {
     this.consoleHelper = new OpponentConsoleHelper();
     this.randomNumberHelper = new RandomNumberHelper(); 
     this.answerNumbers = [];
-  }
-
-  showStartComment() {
-    this.consoleHelper.printStartBaseballGame();
   }
 
   async prepareAnswerNumbers() {
@@ -26,7 +22,8 @@ class Opponent {
     guessedNumbers.forEach((number, index) => {
       if (this.isStrike(number, index)) {
         strike += 1;
-      } else if (this.isBall(number)) {
+      }
+      if (this.isBall(number)) {
         ball += 1;
       }
     });

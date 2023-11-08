@@ -1,17 +1,15 @@
-import BaseballGameService from './BaseballGameService.js';
+import BaseballGameController from './controllers/BaseballGameController.js';
 
 class BaseballGameClient {
-  constructor() {
-    this.baseballGameService = new BaseballGameService();
-    this.isInProgress = false;
-  }
+  #baseballGameController = new BaseballGameController();
+  #isInProgress = false;
 
   async playBaseballGame() {
-    await this.baseballGameService.startBaseballGame();
-    this.isInProgress = true;
+    await this.#baseballGameController.startBaseballGame();
+    this.#changeToStartingStatus();
 
-    while (this.isInProgress) {
-      const guessdNumbers = await this.baseballGameService.guessNumbers();
+    while (this.#isInProgress) {
+      const guessdNumbers = await this.#baseballGameController.guessNumbers();
       const { strike, ball } = await this.baseballGameService.compareToAnswers(guessdNumbers);
       await this.baseballGameService.showComparedResult(strike, ball);
       
@@ -19,6 +17,10 @@ class BaseballGameClient {
         this.isInProgress = await this.baseballGameService.startNewGameOrQuit();
       }
     }
+  }
+
+  #changeToStartingStatus() {
+    this.#isInProgress = true;
   }
 
   isCorrect(strike, ball) {

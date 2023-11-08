@@ -2,7 +2,7 @@ export const CHOICE_START_NEW_GAME = '1';
 
 export const ERROR_MESSAGE = '[ERROR]';
 
-export const START_BASEBALL_GAME = '숫자 야구 게임을 시작합니다.';
+export const INTRO_MESSAGE = '숫자 야구 게임을 시작합니다.';
 export const ENTER_NUMBERS = '숫자를 입력해주세요 : ';
 export const NOTHING = '낫싱';
 export const THREE_STRIKE = '3스트라이크';

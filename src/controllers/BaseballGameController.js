@@ -2,16 +2,13 @@ import Oppernent from '../models/Opponent.js';
 import Player from '../models/Player.js';
 import { CHOICE_START_NEW_GAME } from '../common/constants.js';
 import IntroView from '../views/IntroView.js';
+import GusessingNumbersView from '../views/GuessingNumbersView.js';
 
 class BaseballGameController {
-  #introView;
-  #opponent;
-
-  constructor() {
-    this.#introView = new IntroView();
-    this.#opponent = new Oppernent();
-    this.player = new Player();
-  }
+  #introView = new IntroView();
+  #guessingNumbersViwe = new GusessingNumbersView();
+  #opponent = new Oppernent();
+  #player = new Player();
 
   async startBaseballGame() {
     this.#introView.announceBeginning();
@@ -19,7 +16,8 @@ class BaseballGameController {
   }
 
   async guessNumbers() {
-    return await this.player.guessNumbers();
+    const guessdNumbers = this.#guessingNumbersViwe.enterGuessedNumbers();
+    await this.player.guessNumbers();
   }
 
   async compareToAnswers(guessedNumbers) {

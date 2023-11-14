@@ -2,12 +2,16 @@ import { CHOICE_START_NEW_GAME } from './common/constants';
 import BaseballGameController from './controllers/BaseballGameController';
 
 class App {
-  private readonly baseballGameController = new BaseballGameController();
-  private isInProgress = false;
+  private readonly baseballGameController: BaseballGameController;
+  private isInProgress: boolean;
+
+  constructor() {
+    this.baseballGameController = new BaseballGameController();
+    this.isInProgress = true;
+  }
   
   async play() {
     await this.baseballGameController.startBaseballGame();
-    this.changeStartingStatus();
 
     while (this.isInProgress) {
       await this.baseballGameController.guessNumbers();
@@ -24,10 +28,6 @@ class App {
         this.changeEndStatus();
       }
     }
-  }
-
-  changeStartingStatus() {
-    this.isInProgress = true;
   }
 
   changeEndStatus() {

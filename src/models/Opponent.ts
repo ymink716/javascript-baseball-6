@@ -1,55 +1,65 @@
-import RandomNumberGenerator from '../utils/RandomNumberGenerator';
-import AnswerNumbers from './vo/AnswerNumbers';
+import BaseballNumbersGenerator from './BaseballNumbersGenerator';
+import BaseballGameNumbers from './vo/BaseballGameNumbers';
 
 class Opponent {
-  private readonly randomNumberGenerator = new RandomNumberGenerator(); 
-  private answerNumbers: AnswerNumbers;
+  private readonly baseballNumbersGenerator = new BaseballNumbersGenerator(); 
+  private numbers: BaseballGameNumbers;
 
-  async prepareAnswerNumbers(): Promise<void> {
-    const numbers = this.randomNumberGenerator.generateRandomNumbers();
-    this.answerNumbers = new AnswerNumbers(numbers);
-    console.log(this.answerNumbers.getAnswerNumbers());
+  constructor() {
+    const numbers = this.baseballNumbersGenerator.generateRandomNumbers();
+    this.numbers = new BaseballGameNumbers(numbers);
+    console.log(this.numbers);
   }
 
-  async compareToAnswers(guessedNumbers) {
-    const strikes = this.countStrikes(guessedNumbers);
-    const balls = this.countBalls(guessedNumbers);
-
-    return { strikes, balls };
+  public getNumbers() {
+    return this.numbers.getNumbers();
   }
 
-  private countStrikes(numbers) {
-    let strikes = 0;
+  // async prepareAnswerNumbers(): Promise<void> {
+  //   const numbers = this.randomNumberGenerator.generateRandomNumbers();
+  //   this.answerNumbers = new AnswerNumbers(numbers);
+  //   console.log(this.answerNumbers.getAnswerNumbers());
+  // }
 
-    numbers.forEach((number, index) => {
-      if (this.isStrike(number, index)) {
-        strikes += 1;
-      }
-    });
+  // async compareToAnswers(guessedNumbers) {
+  //   const strikes = this.countStrikes(guessedNumbers);
+  //   const balls = this.countBalls(guessedNumbers);
 
-    return strikes;
-  }
+  //   return { strikes, balls };
+  // }
 
-  private countBalls(numbers) {
-    let balls = 0;
+  // private countStrikes(numbers) {
+  //   let strikes = 0;
 
-    numbers.forEach((number, index) => {
-      if (this.isBall(number, index)) {
-        balls += 1;
-      }
-    });
+  //   numbers.forEach((number, index) => {
+  //     if (this.isStrike(number, index)) {
+  //       strikes += 1;
+  //     }
+  //   });
+
+  //   return strikes;
+  // }
+
+  // private countBalls(numbers) {
+  //   let balls = 0;
+
+  //   numbers.forEach((number, index) => {
+  //     if (this.isBall(number, index)) {
+  //       balls += 1;
+  //     }
+  //   });
     
-    return balls;
-  }
+  //   return balls;
+  // }
 
-  private isStrike(guess, index) {
-    return guess === this.answerNumbers.getAnswerNumbers()[index];
-  }
+  // private isStrike(guess, index) {
+  //   return guess === this.answerNumbers.getAnswerNumbers()[index];
+  // }
 
-  private isBall(guess, index) {
-    return guess !== this.answerNumbers.getAnswerNumbers()[index] 
-      && this.answerNumbers.getAnswerNumbers().includes(guess);
-  }
+  // private isBall(guess, index) {
+  //   return guess !== this.answerNumbers.getAnswerNumbers()[index] 
+  //     && this.answerNumbers.getAnswerNumbers().includes(guess);
+  // }
 }
 
 export default Opponent;

@@ -2,19 +2,25 @@ import Oppernent from '../models/Opponent';
 import Player from '../models/Player';
 import IntroView from '../views/IntroView';
 import GusessingNumbersView from '../views/GuessingNumbersView';
-import GuessResultsView from '../views/GuessResultsView';
+import GuessResultsView from '../views/BallAndStrikesView';
 import AskingRestartView from '../views/AskingRestartView';
 
 class BaseballGameController {
-  private readonly introView = new IntroView();
+  private readonly introView: IntroView;
   private readonly guessingNumbersView = new GusessingNumbersView();
   private readonly guessResultsView = new GuessResultsView();
   private readonly askingRestartView = new AskingRestartView();
-  private readonly opponent = new Oppernent();
+  
+  private opponent: Oppernent;
   private player: Player;
 
+  constructor() {
+    this.introView = new IntroView();
+  }
+  
   async startBaseballGame() {
-    await this.opponent.prepareAnswerNumbers();
+    this.opponent = new Oppernent();
+
     await this.introView.announceBeginning();
   }
 

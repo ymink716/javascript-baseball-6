@@ -1,6 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ENTER_NUMBERS } from "../src/common/constants.js";
-import GusessingNumbersView from "../src/views/GuessingNumbersView.js";
+import GusessingNumbersView from "../src/views/GuessingNumbersView";
 
 const mockQuestions = (input) => {
   MissionUtils.Console.readLineAsync = jest.fn();

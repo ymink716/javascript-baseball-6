@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import IntroView from "../src/views/IntroView.js";
-import { INTRO_MESSAGE } from '../src/common/constants.js';
+import IntroView from "../src/views/IntroView";
+import { INTRO_MESSAGE } from '../src/common/constants';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");

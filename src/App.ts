@@ -1,5 +1,5 @@
-import { CHOICE_START_NEW_GAME } from './common/constants.js';
-import BaseballGameController from './controllers/BaseballGameController.js';
+import { CHOICE_START_NEW_GAME } from './common/constants';
+import BaseballGameController from './controllers/BaseballGameController';
 
 class App {
   private readonly baseballGameController = new BaseballGameController();

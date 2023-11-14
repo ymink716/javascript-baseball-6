@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { RANDOM_NUMBER_START, RANDOM_NUMBER_END, RANDOM_NUMBER_COUNT } from '../common/constants.js';
+import { RANDOM_NUMBER_START, RANDOM_NUMBER_END, RANDOM_NUMBER_COUNT } from '../common/constants';
 
 class RandomNumberGenerator {
   private readonly RANDOM_NUMBER_START = RANDOM_NUMBER_START;

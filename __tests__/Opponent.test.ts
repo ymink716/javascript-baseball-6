@@ -1,8 +1,8 @@
-import Opponent from "../src/models/Opponent.js";
+import Opponent from "../src/models/Opponent";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import AnswerNumbers from "../src/models/vo/AnswerNumbers";
 
-jest.mock("../src/models/vo/AnswerNumbers.js");
+jest.mock("../src/models/vo/AnswerNumbers");
 
 describe("Opponent", () => {
   let opponent;

@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ENTER_NUMBERS } from '../common/constants';
-import * as readline from 'readline';
 
 class GusessingNumbersView {
   private readonly ENTER_NUMBERS = ENTER_NUMBERS;

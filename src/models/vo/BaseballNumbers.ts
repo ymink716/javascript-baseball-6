@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from "../../common/constants";
 
-class BaseballGameNumbers {
+class BaseballNumbers {
   private numbers: number[];
 
   constructor(numbers: string[] | number[]) {
@@ -45,9 +45,9 @@ class BaseballGameNumbers {
     return true;
   }
 
-  getNumbers(): number[] {
+  public getNumbers(): number[] {
     return this.numbers;
   }
 }
 
-export default BaseballGameNumbers;
+export default BaseballNumbers;

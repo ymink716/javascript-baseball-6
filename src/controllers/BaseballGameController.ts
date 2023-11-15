@@ -1,58 +1,64 @@
-import Oppernent from '../models/Opponent';
-import Player from '../models/Player';
+import Answer from '../models/Answer';
+import Guess from '../models/Guess';
 import IntroView from '../views/IntroView';
-import GusessingNumbersView from '../views/GuessingNumbersView';
-import GuessResultsView from '../views/BallAndStrikesView';
-import AskingRestartView from '../views/AskingRestartView';
+import GusessView from '../views/GuessView';
+import RegameView from '../views/RegameView';
+import Referee from '../models/Referee';
+import ResultView from '../views/ResultView';
+import Host from '../models/Host';
 
 class BaseballGameController {
   private readonly introView: IntroView;
-  private readonly guessingNumbersView = new GusessingNumbersView();
-  private readonly guessResultsView = new GuessResultsView();
-  private readonly askingRestartView = new AskingRestartView();
+  private readonly gusessView: GusessView;
+  private resultView: ResultView;
+  private readonly regameView: RegameView;
   
-  private opponent: Oppernent;
-  private player: Player;
+  private answer: Answer;
+  private guess: Guess;
+  private referee: Referee;
+  private host: Host;
 
   constructor() {
     this.introView = new IntroView();
+    this.gusessView = new GusessView();
+    this.regameView = new RegameView();
+
+    this.referee = new Referee();
+    this.host = new Host();
   }
   
-  async startBaseballGame() {
-    this.opponent = new Oppernent();
+  public async startBaseballGame(): Promise<void> {
+    this.answer = new Answer();
 
     await this.introView.announceBeginning();
   }
 
-  async guessNumbers() {
-    const guessdNumbers = await this.guessingNumbersView.enterGuessedNumbers();
+  public async guessNumbers(): Promise<void> {
+    const guessdNumbers = await this.gusessView.guessNumbers();
     
-    this.player = new Player(guessdNumbers);
-    // this.#player.guessNumbers(guessdNumbers);
+    this.guess = new Guess(guessdNumbers);
   }
 
-  async showGuessResults() {
-    const guessdNumbers = this.player.showGuessedNumbers();
-    
-    const { strikes, balls } = await this.opponent.compareToAnswers(guessdNumbers);
-    this.player.receiveGuessResults(strikes, balls);
+  public async compareToAnswer(): Promise<string> {
+    const guessdNumbers = this.guess.getNumbers();
+    const answerNumbers = this.answer.getNumbers();
 
-    this.guessResultsView.showComparedResult(strikes, balls);
+    const result = this.referee.judge(guessdNumbers, answerNumbers);
+
+    this.resultView = new ResultView(result);
+    this.resultView.printResult();
+
+    return result;
   }
 
-  isAnswer() {
-    const { strikes, balls } = this.player.showGuessResults();
-    return strikes === 3 && balls === 0;
+  public async askRegame(): Promise<boolean> {
+    const choice = await this.regameView.askRegame();
+
+    return this.host.askRegame(choice);
   }
 
-  async askStartNewGame() {
-    const input = await this.askingRestartView.askRestartOrQuit();
-
-    return this.player.chooseRestartOrQuit(input);
-  }
-
-  async prepareNewGame() {
-    await this.opponent.prepareAnswerNumbers();
+  public async prepareNewGame(): Promise<void> {
+    this.answer = new Answer();
   }
 }
 

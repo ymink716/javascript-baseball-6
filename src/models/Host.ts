@@ -1,13 +1,22 @@
+import { CHOICE_QUIT, CHOICE_START_NEW_GAME, ERROR_MESSAGE } from "../common/constants";
 
 
 class Host {
-  constructor() {
+  public askRegame(choice: string): boolean {
+    if (!this.isStartOrQuitOptions(choice)) {
+      throw Error(ERROR_MESSAGE);
+    }
 
+    if (choice === CHOICE_START_NEW_GAME) {
+      return true;
+    }
+    
+    return false;
   }
 
-  public startNewGame() {
-    return;
+  private isStartOrQuitOptions(input): boolean {
+    return [CHOICE_START_NEW_GAME, CHOICE_QUIT].includes(input);
   }
-
-  public askRe
 }
+
+export default Host;

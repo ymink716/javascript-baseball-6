@@ -36,51 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var constants_1 = require("./common/constants");
-var BaseballGameController_1 = require("./controllers/BaseballGameController");
-var App = /** @class */ (function () {
-    function App() {
-        this.baseballGameController = new BaseballGameController_1.default();
-        this.isInProgress = true;
+var mission_utils_1 = require("@woowacourse/mission-utils");
+var ResultView = /** @class */ (function () {
+    function ResultView(result) {
+        this.result = result;
     }
-    App.prototype.play = function () {
+    ResultView.prototype.printResult = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var result, isRegame;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.baseballGameController.startBaseballGame()];
+                    case 0: return [4 /*yield*/, mission_utils_1.Console.print(this.result)];
                     case 1:
                         _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        if (!this.isInProgress) return [3 /*break*/, 9];
-                        return [4 /*yield*/, this.baseballGameController.guessNumbers()];
-                    case 3:
-                        _a.sent();
-                        return [4 /*yield*/, this.baseballGameController.compareToAnswer()];
-                    case 4:
-                        result = _a.sent();
-                        if (!(result === constants_1.THREE_STRIKE)) return [3 /*break*/, 8];
-                        return [4 /*yield*/, this.baseballGameController.askRegame()];
-                    case 5:
-                        isRegame = _a.sent();
-                        if (!isRegame) return [3 /*break*/, 7];
-                        return [4 /*yield*/, this.baseballGameController.prepareNewGame()];
-                    case 6:
-                        _a.sent();
-                        return [3 /*break*/, 2];
-                    case 7:
-                        this.changeEndStatus();
-                        _a.label = 8;
-                    case 8: return [3 /*break*/, 2];
-                    case 9: return [2 /*return*/];
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    App.prototype.changeEndStatus = function () {
-        this.isInProgress = false;
-    };
-    return App;
+    return ResultView;
 }());
-exports.default = App;
+exports.default = ResultView;

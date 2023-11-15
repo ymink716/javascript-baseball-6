@@ -1,4 +1,4 @@
-import { CHOICE_START_NEW_GAME } from './common/constants';
+import { CHOICE_START_NEW_GAME, THREE_STRIKE } from './common/constants';
 import BaseballGameController from './controllers/BaseballGameController';
 
 class App {
@@ -10,17 +10,17 @@ class App {
     this.isInProgress = true;
   }
   
-  async play() {
+  public async play() {
     await this.baseballGameController.startBaseballGame();
 
     while (this.isInProgress) {
       await this.baseballGameController.guessNumbers();
-      await this.baseballGameController.showGuessResults();
+      const result = await this.baseballGameController.compareToAnswer();
       
-      if (this.baseballGameController.isAnswer()) {
-        const choice = await this.baseballGameController.askStartNewGame();
+      if (result === THREE_STRIKE) {
+        const isRegame = await this.baseballGameController.askRegame();
         
-        if (choice === CHOICE_START_NEW_GAME) {
+        if (isRegame) {
           await this.baseballGameController.prepareNewGame();
           continue;
         }

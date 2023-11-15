@@ -1,15 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ENTER_NUMBERS } from '../common/constants';
 
-class GusessingNumbersView {
+class GusessView {
   private readonly ENTER_NUMBERS = ENTER_NUMBERS;
 
-  async enterGuessedNumbers(): Promise<string[]> {
+  async guessNumbers(): Promise<string[]> {
     const userInput = await Console.readLineAsync(this.ENTER_NUMBERS);
-    const guessedNumbers = userInput.split("");
+    const numbers = userInput.split("");
     
-    return guessedNumbers;
+    return numbers;
   }
 }
 
-export default GusessingNumbersView;
+export default GusessView;

@@ -9,7 +9,7 @@ class Answer {
     this.baseballNumbersGenerator = new BaseballNumbersGenerator();
     const numbers = this.baseballNumbersGenerator.generateRandomNumbers();
     this.numbers = new BaseballNumbers(numbers);
-    console.log(this.numbers);
+    //console.log(this.numbers);
   }
 
   public getNumbers() {

@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import RandomNumberGenerator from '../src/utils/RandomNumberGenerator';
+import BaseballNumbersGenerator from '../src/models/BaseballNumbersGenerator';
 
-describe("RandomNumberGenerator", () => {
+describe("BaseballNumbersGenerator", () => {
 
   const mockRandoms = (numbers) => {
     MissionUtils.Random.pickNumberInRange = jest.fn();
@@ -14,8 +14,8 @@ describe("RandomNumberGenerator", () => {
     test("1~9 사이의 중복되지 않은 3개의 숫자를 리스트로 반환한다.", async () => {
       const randoms = [1, 3, 3, 5, 8, 9];
       mockRandoms(randoms);
-      const randomNumberGenerator = new RandomNumberGenerator();
-      
+
+      const randomNumberGenerator = new BaseballNumbersGenerator();
       const result = randomNumberGenerator.generateRandomNumbers();
 
       expect(result.length).toBe(3);

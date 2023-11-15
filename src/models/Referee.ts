@@ -9,7 +9,7 @@ class Referee {
     this.comparator = new BaseballNumbersComparator();
   }
 
-  public judge(guessdNumbers: number[], answerNumbers: number[]) {
+  public judge(guessdNumbers: number[], answerNumbers: number[]): string {
     const strikes = this.comparator.countStrikes(guessdNumbers, answerNumbers);
     const balls = this.comparator.countBalls(guessdNumbers, answerNumbers);
 

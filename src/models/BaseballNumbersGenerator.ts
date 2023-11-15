@@ -6,7 +6,7 @@ class BaseballNumbersGenerator {
   private readonly RANDOM_NUMBER_END = RANDOM_NUMBER_END;
   private readonly RANDOM_NUMBER_COUNT = RANDOM_NUMBER_COUNT;
 
-  generateRandomNumbers(): number[] {
+  public generateRandomNumbers(): number[] {
     const numbers = [];
 
     while (numbers.length < this.RANDOM_NUMBER_COUNT) {

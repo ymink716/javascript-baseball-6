@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import GusessingNumbersView from "../src/views/GuessingNumbersView";
+import RegameView from "../src/views/RegameView";
 
 const mockQuestions = (input) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -15,17 +15,17 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe("GusessingNumbersView", () => {
-  describe("enterGuessedNumbers()", () => {
-    test("입력받은 문자열을 리스트로 반환한다.", async () => {
-      const answer = "246";
+describe("RegameView", () => {
+  describe("askRegame()", () => {
+    test("입력받은 문자열을 반환한다.", async () => {
+      const answer = "1";
   
       mockQuestions(answer);
   
-      const guessingNumbersView = new GusessingNumbersView();
-      const result = await guessingNumbersView.enterGuessedNumbers();
+      const regameView = new RegameView();
+      const result = await regameView.askRegame();
       
-      expect(result).toEqual(['2', '4', '6']);
+      expect(result).toBe('1');
     });
   });
 });

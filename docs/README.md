@@ -23,19 +23,31 @@
 - 추측한 숫자를 제공한다.
 
 
-### 
+### Referee
+
+- 스트라이크, 볼 여부를 가지고 결과를 판단한다. (낫싱, 3스트라이크, -볼 -스트라이크)
+
 ### BaseballNumbersComparator
 
--
+- 추측한 숫자와 정답한 숫자를 비교하여 스트라이크, 볼 여부를 알려준다.
 
-### PlayerConsoleHelper
+### Host
 
-- 플레이어의 콘솔 입출력 관련 기능을 담당한다.
+- 게임을 새로 시작할지 종료할지 묻는다.
 
-### OpponentConsoleHelper
+### IntroView
 
-- 상대방(컴퓨터)의 콘솔 입출력 관련 기능을 담당한다.
+- 게임 시작을 알리는 뷰
 
-### RandomNumberHelper
+### GuessView
 
-- 난수 생성 기능을 담당한다.
+- 추측한 숫자를 입력받는 뷰
+
+### ResultView
+
+- 추측한 값의 결과를 보여주는 뷰
+
+### RegameView
+
+- 게임을 재시작할지 그만할지 묻는 뷰
+

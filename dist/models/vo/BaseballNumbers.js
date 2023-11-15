@@ -19,12 +19,21 @@ var BaseballNumbers = /** @class */ (function () {
     };
     BaseballNumbers.prototype.isNaturalNumber = function (numbers) {
         var validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        numbers.forEach(function (num) {
-            if (!validNumbers.includes(Number(num))) {
-                return false;
+        // const [first, second, third] = numbers;
+        var result = numbers.every(function (num) {
+            if (validNumbers.includes(num)) {
+                return true;
             }
+            return false;
         });
-        return true;
+        console.log(result);
+        return result;
+        // numbers.forEach((num) => {
+        //   if (!validNumbers.includes(Number(num))) {
+        //     return false;
+        //   }
+        // });
+        // return true;
     };
     BaseballNumbers.prototype.isUnique = function (numbers) {
         var first = numbers[0], second = numbers[1], third = numbers[2];

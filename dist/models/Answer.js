@@ -7,7 +7,7 @@ var Answer = /** @class */ (function () {
         this.baseballNumbersGenerator = new BaseballNumbersGenerator_1.default();
         var numbers = this.baseballNumbersGenerator.generateRandomNumbers();
         this.numbers = new BaseballNumbers_1.default(numbers);
-        console.log(this.numbers);
+        //console.log(this.numbers);
     }
     Answer.prototype.getNumbers = function () {
         return this.numbers.getNumbers();

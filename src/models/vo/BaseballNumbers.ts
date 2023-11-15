@@ -3,7 +3,7 @@ import { ERROR_MESSAGE } from "../../common/constants";
 class BaseballNumbers {
   private numbers: number[];
 
-  constructor(numbers: string[] | number[]) {
+  constructor(numbers: number[]) {
     if (!this.validate(numbers)) {
       throw Error(ERROR_MESSAGE);
     }
@@ -11,7 +11,7 @@ class BaseballNumbers {
     this.numbers = numbers.map(Number);
   }
 
-  private validate(numbers: string[] | number[]): boolean {
+  private validate(numbers: number[]): boolean {
     if (this.isThreeLetters(numbers) && this.isNaturalNumber(numbers) && this.isUnique(numbers)) {
       return true;
     }
@@ -19,23 +19,24 @@ class BaseballNumbers {
     return false;
   }
 
-  private isThreeLetters(numbers: string[] | number[]): boolean {
+  private isThreeLetters(numbers: number[]): boolean {
     return numbers.length === 3;
   }
 
-  private isNaturalNumber(numbers: string[] | number[]): boolean {
+  private isNaturalNumber(numbers: number[]): boolean {
     const validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    numbers.forEach((num) => {
-      if (!validNumbers.includes(Number(num))) {
-        return false;
+    const result = numbers.every((num) => {
+      if(validNumbers.includes(num)) {
+        return true;
       }
+      return false;
     });
 
-    return true;
+    return result;
   }
 
-  private isUnique(numbers: string[] | number[]): boolean {
+  private isUnique(numbers: number[]): boolean {
     const [first, second, third] = numbers;
 
     if (first === second || second === third || third === first) {

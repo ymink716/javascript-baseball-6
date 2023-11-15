@@ -51,7 +51,13 @@ var GusessView = /** @class */ (function () {
                     case 1:
                         userInput = _a.sent();
                         numbers = userInput.split("");
-                        return [2 /*return*/, numbers];
+                        try {
+                            return [2 /*return*/, numbers.map(Number)];
+                        }
+                        catch (error) {
+                            throw new Error(constants_1.ERROR_MESSAGE);
+                        }
+                        return [2 /*return*/];
                 }
             });
         });

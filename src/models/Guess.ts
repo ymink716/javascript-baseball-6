@@ -3,7 +3,7 @@ import BaseballNumbers from './vo/BaseballNumbers';
 class Guess {
   private numbers: BaseballNumbers;
   
-  constructor(numbers: string[]) {
+  constructor(numbers: number[]) {
     this.numbers = new BaseballNumbers(numbers);
   }
 

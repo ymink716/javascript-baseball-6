@@ -1,25 +1,32 @@
 ## 구현할 기능 목록
 
-### BaseballGameClient
+### App
 
 - 숫자 야구 게임 진행에 관련된 로직을 담당한다.
 
-### BaseballGameService
+### BaseballGameController
 
-- 숫자 야구 게임의 비지니스 로직을 담당한다.
+- 뷰와 모델의 중개자 역할을 한다.
 
-### Player
+### Answer
 
-- 상대방이 가지고 있는 중복되지 않는 3자리 숫자를 추측한다.
+- 정답 숫자를 생성한다.
+- 정답 숫자를 제공한다.
+
+### class BaseballNumbersGenerator 
+
+- 숫자 야구에 필요한 임의의 숫자 리스트를 생성해준다.
+
+### Guess
+
+- 추측한 숫자를 생성한다.
+- 추측한 숫자를 제공한다.
 
 
-### Opponent
+### 
+### BaseballNumbersComparator
 
-- 게임 시작을 알린다.
-- 정답 숫자를 제출한다.
-- 플레이어가 제출한 숫자를 체크하여 스트라이크, 볼 여부를 파악한다.
-- 스트라이크, 볼 개수를 플레이어에게 알려준다.
-- 플레이어가 정답을 맞추면, 게임을 재시작할지 그만할지 묻는다.
+-
 
 ### PlayerConsoleHelper
 

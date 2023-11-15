@@ -15,7 +15,7 @@ class App {
 
     while (this.isInProgress) {
       await this.baseballGameController.guessNumbers();
-      const result = await this.baseballGameController.compareToAnswer();
+      const result = await this.baseballGameController.judgeResult();
       
       if (result === THREE_STRIKE) {
         const isRegame = await this.baseballGameController.askRegame();

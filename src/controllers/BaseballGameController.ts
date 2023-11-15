@@ -39,7 +39,7 @@ class BaseballGameController {
     this.guess = new Guess(guessdNumbers);
   }
 
-  public async compareToAnswer(): Promise<string> {
+  public async judgeResult(): Promise<string> {
     const guessdNumbers = this.guess.getNumbers();
     const answerNumbers = this.answer.getNumbers();
 

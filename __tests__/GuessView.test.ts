@@ -17,7 +17,7 @@ const getLogSpy = () => {
 
 describe("GusessView", () => {
   describe("guessNumbers()", () => {
-    test("입력받은 문자열을 리스트로 반환한다.", async () => {
+    test("입력받은 문자열을 숫자 리스트로 반환한다.", async () => {
       const answer = "246";
   
       mockQuestions(answer);
@@ -25,7 +25,7 @@ describe("GusessView", () => {
       const gusessView = new GusessView();
       const result = await gusessView.guessNumbers();
       
-      expect(result).toEqual(['2', '4', '6']);
+      expect(result).toEqual([2, 4, 6]);
     });
   });
 });

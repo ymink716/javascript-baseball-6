@@ -44,16 +44,6 @@ class BaseballGameController {
     this.guess = new BaseballNumbers(guess);
   }
 
-  public async judgeResult(): Promise<string> {
-    const result = this.referee.judge(this.guess, this.answer);
-
-    this.resultView = new ResultView(result);
-    this.resultView.printResult();
-
-    return result;
-  }
-
-  // TODO: 로직 모델로
   public async isAnswer(): Promise<boolean> {
     const result = this.referee.judge(this.guess, this.answer);
 
@@ -66,10 +56,17 @@ class BaseballGameController {
   public async askRegame(): Promise<boolean> {
     const choice = await this.regameView.askRegame();
 
-    return this.host.askRegame(choice);
+    const isRegame = this.host.askRegame(choice);
+
+    if (isRegame) {
+      await this.prepareNewGame();
+      return true;
+    }
+
+    return false;
   }
 
-  public async prepareNewGame(): Promise<void> {
+  private async prepareNewGame(): Promise<void> {
     this.answer = this.baseballNumbersGenerator.generate();
     console.log(this.answer);
   }

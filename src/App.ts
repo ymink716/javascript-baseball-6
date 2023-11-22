@@ -18,19 +18,9 @@ class App {
       
       if (isAnswer) {
         const isRegame = await this.baseballGameController.askRegame();
-        
-        if (isRegame) {
-          await this.baseballGameController.prepareNewGame();
-          continue;
-        }
-
-        this.changeEndStatus();
+        this.isInProgress = isRegame;
       }
     }
-  }
-
-  changeEndStatus() {
-    this.isInProgress = false;
   }
 }
 

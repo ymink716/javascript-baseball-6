@@ -1,27 +1,19 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
 import BaseballNumbersGenerator from '../src/models/BaseballNumbersGenerator';
+import { MockRandoms } from './resources/MockRandoms';
 
 describe("BaseballNumbersGenerator", () => {
+  describe("generate()", () => {
+    test("임의의 BaseballNumbers를 반환한다.", async () => {
+      const generator = new BaseballNumbersGenerator(new MockRandoms());
+      
+      const result = generator.generate();
 
-  const mockRandoms = (numbers) => {
-    MissionUtils.Random.pickNumberInRange = jest.fn();
-    numbers.reduce((acc, number) => {
-      return acc.mockReturnValueOnce(number);
-    }, MissionUtils.Random.pickNumberInRange);
-  };
+      expect(result.getBaseballNumbers().length).toBe(3);
 
-  describe("generateRandomNumbers()", () => {
-    test("1~9 사이의 중복되지 않은 3개의 숫자를 리스트로 반환한다.", async () => {
-      const randoms = [1, 3, 3, 5, 8, 9];
-      mockRandoms(randoms);
-
-      const randomNumberGenerator = new BaseballNumbersGenerator();
-      const result = randomNumberGenerator.generateRandomNumbers();
-
-      expect(result.length).toBe(3);
-      expect(result[0] !== result[1]).toBeTruthy();
-      expect(result[1] !== result[2]).toBeTruthy();
-      expect(result[2] !== result[0]).toBeTruthy();
+      const [first, second, third] = result.getBaseballNumbers();
+      expect(first.getBaseballNumber() !== second.getBaseballNumber()).toBeTruthy();
+      expect(second.getBaseballNumber() !== third.getBaseballNumber()).toBeTruthy();
+      expect(third.getBaseballNumber() !== first.getBaseballNumber()).toBeTruthy();
     });
   })
 });

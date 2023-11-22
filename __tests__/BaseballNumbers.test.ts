@@ -16,12 +16,6 @@ describe("BaseballNumbers", () => {
       expect(() => new BaseballNumbers(baseballNumbers)).toThrow(ERROR_MESSAGE);
     });
 
-    // test("1 ~ 9 사이의 값이 아니라면 Error가 발생한다.", () => {
-    //   const numbers = [1, 0, 9];
-
-    //   expect(() => new BaseballNumbers(numbers)).toThrow(ERROR_MESSAGE);
-    // });
-
     test("3개의 요소 중 중복이 있다면 Error가 발생한다.", () => {
       const baseballNumbers = [
         new BaseballNumber(1), 
@@ -43,7 +37,6 @@ describe("BaseballNumbers", () => {
       expect(result.getBaseballNumbers().length).toBe(3);
       
       const [first, second, third] = result.getBaseballNumbers();
-
       expect(first.getBaseballNumber() !== second.getBaseballNumber()).toBeTruthy();
       expect(second.getBaseballNumber() !== third.getBaseballNumber()).toBeTruthy();
       expect(third.getBaseballNumber() !== first.getBaseballNumber()).toBeTruthy();

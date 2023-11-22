@@ -1,5 +1,5 @@
 import BaseballNumbersGenerator from '../src/models/BaseballNumbersGenerator';
-import { MockRandoms } from './resources/MockRandoms';
+import { MockRandoms } from '../src/models/utils/MockRandoms';
 
 describe("BaseballNumbersGenerator", () => {
   describe("generate()", () => {

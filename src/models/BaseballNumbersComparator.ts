@@ -1,6 +1,7 @@
+import { Comparator } from "./interface/Comparator";
 import BaseballNumbers from "./vo/BaseballNumbers";
 
-class BaseballNumbersComparator {
+class BaseballNumbersComparator implements Comparator {
   public countStrikes(guess: BaseballNumbers, answer: BaseballNumbers): number {
     const guessedNumbers = guess.getBaseballNumbers();
     const answerNumbers = answer.getBaseballNumbers();
@@ -24,7 +25,7 @@ class BaseballNumbersComparator {
         counts += 1;
       }
     });
-    console.log(counts)
+
     return counts;
   }
 }

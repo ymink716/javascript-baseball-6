@@ -19,11 +19,9 @@ describe("RegameView", () => {
   describe("askRegame()", () => {
     test("입력받은 문자열을 반환한다.", async () => {
       const answer = "1";
-  
       mockQuestions(answer);
   
-      const regameView = new RegameView();
-      const result = await regameView.askRegame();
+      const result = await RegameView.askRegame();
       
       expect(result).toBe('1');
     });

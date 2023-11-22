@@ -1,4 +1,4 @@
-import { Randoms } from '../../src/models/interface/Randoms';
+import { Randoms } from '../interface/Randoms';
 
 export class MockRandoms implements Randoms {
   private num = 0;

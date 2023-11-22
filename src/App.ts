@@ -1,11 +1,20 @@
 import BaseballGameController from './controllers/BaseballGameController';
+import BaseballNumbersComparator from './models/BaseballNumbersComparator';
+import Host from './models/Host';
+import Referee from './models/Referee';
+import { Randoms } from './models/utils/RandomNumbers';
+import BaseballNumbersGenerator from './models/BaseballNumbersGenerator';
 
 class App {
   private readonly baseballGameController: BaseballGameController;
   private isInProgress: boolean;
 
   constructor() {
-    this.baseballGameController = new BaseballGameController();
+    this.baseballGameController = new BaseballGameController(
+      new Referee(new BaseballNumbersComparator()),
+      new Host(),
+      new BaseballNumbersGenerator(new Randoms()),
+    );
     this.isInProgress = true;
   }
   

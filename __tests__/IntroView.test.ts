@@ -13,8 +13,7 @@ describe("IntroView", () => {
     test("게임 시작 메세지를 콘솔에 출력한다.", async () => {
       const logSpy = getLogSpy();
   
-      const introView = new IntroView();
-      await introView.announceBeginning();
+      await IntroView.announceBeginning();
   
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INTRO_MESSAGE));
     });

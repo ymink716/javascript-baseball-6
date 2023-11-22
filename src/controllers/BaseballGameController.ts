@@ -14,12 +14,16 @@ class BaseballGameController {
   private guess: BaseballNumbers;
   private referee: Referee;
   private host: Host;
-  private readonly baseballNumbersGenerator: BaseballNumbersGenerator; 
+  private baseballNumbersGenerator: BaseballNumbersGenerator; 
 
-  constructor() {
-    this.baseballNumbersGenerator = new BaseballNumbersGenerator();
-    this.referee = new Referee();
-    this.host = new Host();
+  constructor(
+    referee: Referee,
+    host: Host,
+    baseballNumbersGenerator: BaseballNumbersGenerator, 
+  ) {
+    this.baseballNumbersGenerator = baseballNumbersGenerator;
+    this.referee = referee;
+    this.host = host;
   }
   
   public async startBaseballGame(): Promise<void> {

@@ -22,8 +22,7 @@ describe("GusessView", () => {
   
       mockQuestions(answer);
   
-      const gusessView = new GusessView();
-      const result = await gusessView.guessNumbers();
+      const result = await GusessView.guessNumbers();
       
       expect(result).toEqual([2, 4, 6]);
     });

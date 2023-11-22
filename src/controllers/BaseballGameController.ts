@@ -53,6 +53,7 @@ class BaseballGameController {
     return result;
   }
 
+  // TODO: 로직 모델로
   public async isAnswer(): Promise<boolean> {
     const result = this.referee.judge(this.guess, this.answer);
 

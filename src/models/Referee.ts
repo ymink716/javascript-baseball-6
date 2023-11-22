@@ -1,9 +1,10 @@
-import { NOTHING, THREE_STRIKE } from "../common/constants";
 import BaseballNumbersComparator from "./BaseballNumbersComparator";
 import BaseballNumbers from "./vo/BaseballNumbers";
 
 
 class Referee {
+  private readonly NOTHING = '낫싱';
+  private readonly THREE_STRIKE = '3스트라이크';
   private readonly comparator: BaseballNumbersComparator;
 
   constructor() {
@@ -15,11 +16,11 @@ class Referee {
     const countIncluded = this.comparator.countIncludedNumbers(guess, answer);
 
     if (this.isNothing(strikes, countIncluded)) {
-      return NOTHING;
+      return this.NOTHING;
     } 
     
     if (this.isThreeStrikes(strikes)) {
-      return THREE_STRIKE;
+      return this.THREE_STRIKE;
     }
     
     return `${countIncluded - strikes}볼 ${strikes}스트라이크`;
@@ -33,6 +34,5 @@ class Referee {
     return strikes === 3;
   }
 }
-
 
 export default Referee;

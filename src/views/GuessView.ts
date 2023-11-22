@@ -1,8 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ENTER_NUMBERS, ERROR_MESSAGE } from '../common/constants';
+import { ERROR_MESSAGE } from '../common/constants';
 
 class GusessView {
-  private readonly ENTER_NUMBERS = ENTER_NUMBERS;
+  private readonly ENTER_NUMBERS = '숫자를 입력해주세요 : ';
 
   public async guessNumbers(): Promise<number[]> {
     const userInput = await Console.readLineAsync(this.ENTER_NUMBERS);

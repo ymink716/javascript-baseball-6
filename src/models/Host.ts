@@ -1,13 +1,16 @@
-import { CHOICE_QUIT, CHOICE_START_NEW_GAME, ERROR_MESSAGE } from "../common/constants";
+import { ERROR_MESSAGE } from "../common/constants";
 
 
 class Host {
+  private readonly CHOICE_START_NEW_GAME = '1';
+  private readonly CHOICE_QUIT = '2';
+
   public askRegame(choice: string): boolean {
     if (!this.isStartOrQuitOptions(choice)) {
       throw Error(ERROR_MESSAGE);
     }
 
-    if (choice === CHOICE_START_NEW_GAME) {
+    if (choice === this.CHOICE_START_NEW_GAME) {
       return true;
     }
     
@@ -15,7 +18,7 @@ class Host {
   }
 
   private isStartOrQuitOptions(input): boolean {
-    return [CHOICE_START_NEW_GAME, CHOICE_QUIT].includes(input);
+    return [this.CHOICE_START_NEW_GAME, this.CHOICE_QUIT].includes(input);
   }
 }
 

@@ -1,12 +1,11 @@
 import { Random } from '@woowacourse/mission-utils';
-import { RANDOM_NUMBER_START, RANDOM_NUMBER_END, RANDOM_NUMBER_COUNT } from '../common/constants';
 import BaseballNumber from './vo/baseballNumber';
 import BaseballNumbers from './vo/BaseballNumbers';
 
 class BaseballNumbersGenerator {
-  private readonly RANDOM_NUMBER_START = RANDOM_NUMBER_START;
-  private readonly RANDOM_NUMBER_END = RANDOM_NUMBER_END;
-  private readonly RANDOM_NUMBER_COUNT = RANDOM_NUMBER_COUNT;
+  private readonly RANDOM_NUMBER_START = 1;
+  private readonly RANDOM_NUMBER_END = 9;
+  private readonly RANDOM_NUMBER_COUNT = 3;
 
   public generate(): BaseballNumbers {
     const numbers = [];

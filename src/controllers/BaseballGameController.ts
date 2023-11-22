@@ -9,12 +9,7 @@ import BaseballNumbersGenerator from '../models/BaseballNumbersGenerator';
 import BaseballNumber from '../models/vo/baseballNumber';
 import { THREE_STRIKE } from '../common/constants';
 
-class BaseballGameController {
-  private readonly introView: IntroView;
-  private readonly gusessView: GusessView;
-  private resultView: ResultView;
-  private readonly regameView: RegameView;
-  
+class BaseballGameController {  
   private answer: BaseballNumbers;
   private guess: BaseballNumbers;
   private referee: Referee;
@@ -22,9 +17,6 @@ class BaseballGameController {
   private readonly baseballNumbersGenerator: BaseballNumbersGenerator; 
 
   constructor() {
-    this.introView = new IntroView();
-    this.gusessView = new GusessView();
-    this.regameView = new RegameView();
     this.baseballNumbersGenerator = new BaseballNumbersGenerator();
     this.referee = new Referee();
     this.host = new Host();
@@ -34,11 +26,11 @@ class BaseballGameController {
     this.answer = this.baseballNumbersGenerator.generate();
     console.log(this.answer);
 
-    await this.introView.announceBeginning();
+    await IntroView.announceBeginning();
   }
 
   public async guessNumbers(): Promise<void> {
-    const input = await this.gusessView.guessNumbers();
+    const input = await GusessView.guessNumbers();
     const guess = input.map((num) => new BaseballNumber(num));
 
     this.guess = new BaseballNumbers(guess);
@@ -47,14 +39,14 @@ class BaseballGameController {
   public async isAnswer(): Promise<boolean> {
     const result = this.referee.judge(this.guess, this.answer);
 
-    this.resultView = new ResultView(result);
-    this.resultView.printResult();
+    const resultView = new ResultView(result);
+    resultView.printResult();
 
     return result === THREE_STRIKE;
   }
 
   public async askRegame(): Promise<boolean> {
-    const choice = await this.regameView.askRegame();
+    const choice = await RegameView.askRegame();
 
     const isRegame = this.host.askRegame(choice);
 

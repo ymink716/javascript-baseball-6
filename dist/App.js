@@ -36,7 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var constants_1 = require("./common/constants");
 var BaseballGameController_1 = require("./controllers/BaseballGameController");
 var App = /** @class */ (function () {
     function App() {
@@ -45,7 +44,7 @@ var App = /** @class */ (function () {
     }
     App.prototype.play = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var result, isRegame;
+            var isAnswer, isRegame;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.baseballGameController.startBaseballGame()];
@@ -57,10 +56,10 @@ var App = /** @class */ (function () {
                         return [4 /*yield*/, this.baseballGameController.guessNumbers()];
                     case 3:
                         _a.sent();
-                        return [4 /*yield*/, this.baseballGameController.compareToAnswer()];
+                        return [4 /*yield*/, this.baseballGameController.isAnswer()];
                     case 4:
-                        result = _a.sent();
-                        if (!(result === constants_1.THREE_STRIKE)) return [3 /*break*/, 8];
+                        isAnswer = _a.sent();
+                        if (!isAnswer) return [3 /*break*/, 8];
                         return [4 /*yield*/, this.baseballGameController.askRegame()];
                     case 5:
                         isRegame = _a.sent();

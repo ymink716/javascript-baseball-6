@@ -1,5 +1,6 @@
 import { NOTHING, THREE_STRIKE } from "../common/constants";
 import BaseballNumbersComparator from "./BaseballNumbersComparator";
+import BaseballNumbers from "./vo/BaseballNumbers";
 
 
 class Referee {
@@ -9,27 +10,27 @@ class Referee {
     this.comparator = new BaseballNumbersComparator();
   }
 
-  public judge(guessdNumbers: number[], answerNumbers: number[]): string {
-    const strikes = this.comparator.countStrikes(guessdNumbers, answerNumbers);
-    const balls = this.comparator.countBalls(guessdNumbers, answerNumbers);
+  public judge(guess: BaseballNumbers, answer: BaseballNumbers): string {
+    const strikes = this.comparator.countStrikes(guess, answer);
+    const countIncluded = this.comparator.countIncludedNumbers(guess, answer);
 
-    if (this.isNothing(strikes, balls)) {
+    if (this.isNothing(strikes, countIncluded)) {
       return NOTHING;
     } 
     
-    if (this.isThreeStrikes(strikes, balls)) {
+    if (this.isThreeStrikes(strikes)) {
       return THREE_STRIKE;
     }
     
-    return `${balls}볼 ${strikes}스트라이크`;
+    return `${countIncluded - strikes}볼 ${strikes}스트라이크`;
   }
 
-  private isNothing(strikes: number, balls: number): boolean {
-    return strikes === 0 && balls === 0;
+  private isNothing(strikes: number, countIncluded: number): boolean {
+    return strikes === 0 && countIncluded === 0;
   }
 
-  private isThreeStrikes(strikes: number, balls: number): boolean {
-    return strikes === 3 && balls === 0;
+  private isThreeStrikes(strikes: number): boolean {
+    return strikes === 3;
   }
 }
 

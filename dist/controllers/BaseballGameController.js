@@ -36,19 +36,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Answer_1 = require("../models/Answer");
-var Guess_1 = require("../models/Guess");
 var IntroView_1 = require("../views/IntroView");
 var GuessView_1 = require("../views/GuessView");
 var RegameView_1 = require("../views/RegameView");
 var Referee_1 = require("../models/Referee");
 var ResultView_1 = require("../views/ResultView");
 var Host_1 = require("../models/Host");
+var BaseballNumbers_1 = require("../models/vo/BaseballNumbers");
+var BaseballNumbersGenerator_1 = require("../models/BaseballNumbersGenerator");
+var baseballNumber_1 = require("../models/vo/baseballNumber");
+var constants_1 = require("../common/constants");
 var BaseballGameController = /** @class */ (function () {
     function BaseballGameController() {
         this.introView = new IntroView_1.default();
         this.gusessView = new GuessView_1.default();
         this.regameView = new RegameView_1.default();
+        this.baseballNumbersGenerator = new BaseballNumbersGenerator_1.default();
         this.referee = new Referee_1.default();
         this.host = new Host_1.default();
     }
@@ -57,7 +60,8 @@ var BaseballGameController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.answer = new Answer_1.default();
+                        this.answer = this.baseballNumbersGenerator.generate();
+                        console.log(this.answer);
                         return [4 /*yield*/, this.introView.announceBeginning()];
                     case 1:
                         _a.sent();
@@ -68,28 +72,38 @@ var BaseballGameController = /** @class */ (function () {
     };
     BaseballGameController.prototype.guessNumbers = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var guessdNumbers;
+            var input, guess;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.gusessView.guessNumbers()];
                     case 1:
-                        guessdNumbers = _a.sent();
-                        this.guess = new Guess_1.default(guessdNumbers);
+                        input = _a.sent();
+                        guess = input.map(function (num) { return new baseballNumber_1.default(num); });
+                        this.guess = new BaseballNumbers_1.default(guess);
                         return [2 /*return*/];
                 }
             });
         });
     };
-    BaseballGameController.prototype.compareToAnswer = function () {
+    BaseballGameController.prototype.judgeResult = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var guessdNumbers, answerNumbers, result;
+            var result;
             return __generator(this, function (_a) {
-                guessdNumbers = this.guess.getNumbers();
-                answerNumbers = this.answer.getNumbers();
-                result = this.referee.judge(guessdNumbers, answerNumbers);
+                result = this.referee.judge(this.guess, this.answer);
                 this.resultView = new ResultView_1.default(result);
                 this.resultView.printResult();
                 return [2 /*return*/, result];
+            });
+        });
+    };
+    BaseballGameController.prototype.isAnswer = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                result = this.referee.judge(this.guess, this.answer);
+                this.resultView = new ResultView_1.default(result);
+                this.resultView.printResult();
+                return [2 /*return*/, result === constants_1.THREE_STRIKE];
             });
         });
     };
@@ -109,7 +123,7 @@ var BaseballGameController = /** @class */ (function () {
     BaseballGameController.prototype.prepareNewGame = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.answer = new Answer_1.default();
+                this.answer = this.baseballNumbersGenerator.generate();
                 return [2 /*return*/];
             });
         });

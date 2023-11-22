@@ -1,9 +1,13 @@
-class BaseballNumbersComparator {
-  public countStrikes(guessedNumbers: number[], answerNumbers: number[]): number {
-    let strikes = 0;
+import BaseballNumbers from "./vo/BaseballNumbers";
 
-    guessedNumbers.forEach((guess, index) => {
-      if (guess === answerNumbers[index]) {
+class BaseballNumbersComparator {
+  public countStrikes(guess: BaseballNumbers, answer: BaseballNumbers): number {
+    const guessedNumbers = guess.getBaseballNumbers();
+    const answerNumbers = answer.getBaseballNumbers();
+    
+    let strikes = 0;
+    guessedNumbers.forEach((num, index) => {
+      if (num.isEqual(answerNumbers[index])) {
         strikes += 1;
       }
     });
@@ -11,16 +15,17 @@ class BaseballNumbersComparator {
     return strikes;
   }
 
-  public countBalls(guessedNumbers: number[], answerNumbers: number[]): number {
-    let balls = 0;
-
-    guessedNumbers.forEach((guess, index) => {
-      if (guess !== answerNumbers[index] && answerNumbers.includes(guess)) {
-        balls += 1;
+  public countIncludedNumbers(guess: BaseballNumbers, answer: BaseballNumbers): number {
+    const guessedNumbers = guess.getBaseballNumbers();
+    
+    let counts = 0;
+    guessedNumbers.forEach((num) => {
+      if (answer.isIncluded(num)) {
+        counts += 1;
       }
     });
-    
-    return balls;
+    console.log(counts)
+    return counts;
   }
 }
 

@@ -6,22 +6,22 @@ var Referee = /** @class */ (function () {
     function Referee() {
         this.comparator = new BaseballNumbersComparator_1.default();
     }
-    Referee.prototype.judge = function (guessdNumbers, answerNumbers) {
-        var strikes = this.comparator.countStrikes(guessdNumbers, answerNumbers);
-        var balls = this.comparator.countBalls(guessdNumbers, answerNumbers);
-        if (this.isNothing(strikes, balls)) {
+    Referee.prototype.judge = function (guess, answer) {
+        var strikes = this.comparator.countStrikes(guess, answer);
+        var countIncluded = this.comparator.countIncludedNumbers(guess, answer);
+        if (this.isNothing(strikes, countIncluded)) {
             return constants_1.NOTHING;
         }
-        if (this.isThreeStrikes(strikes, balls)) {
+        if (this.isThreeStrikes(strikes)) {
             return constants_1.THREE_STRIKE;
         }
-        return "".concat(balls, "\uBCFC ").concat(strikes, "\uC2A4\uD2B8\uB77C\uC774\uD06C");
+        return "".concat(countIncluded - strikes, "\uBCFC ").concat(strikes, "\uC2A4\uD2B8\uB77C\uC774\uD06C");
     };
-    Referee.prototype.isNothing = function (strikes, balls) {
-        return strikes === 0 && balls === 0;
+    Referee.prototype.isNothing = function (strikes, countIncluded) {
+        return strikes === 0 && countIncluded === 0;
     };
-    Referee.prototype.isThreeStrikes = function (strikes, balls) {
-        return strikes === 3 && balls === 0;
+    Referee.prototype.isThreeStrikes = function (strikes) {
+        return strikes === 3;
     };
     return Referee;
 }());

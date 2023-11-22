@@ -3,23 +3,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var BaseballNumbersComparator = /** @class */ (function () {
     function BaseballNumbersComparator() {
     }
-    BaseballNumbersComparator.prototype.countStrikes = function (guessedNumbers, answerNumbers) {
+    BaseballNumbersComparator.prototype.countStrikes = function (guess, answer) {
+        var guessedNumbers = guess.getBaseballNumbers();
+        var answerNumbers = answer.getBaseballNumbers();
         var strikes = 0;
-        guessedNumbers.forEach(function (guess, index) {
-            if (guess === answerNumbers[index]) {
+        guessedNumbers.forEach(function (num, index) {
+            if (num.isEqual(answerNumbers[index])) {
                 strikes += 1;
             }
         });
         return strikes;
     };
-    BaseballNumbersComparator.prototype.countBalls = function (guessedNumbers, answerNumbers) {
-        var balls = 0;
-        guessedNumbers.forEach(function (guess, index) {
-            if (guess !== answerNumbers[index] && answerNumbers.includes(guess)) {
-                balls += 1;
+    BaseballNumbersComparator.prototype.countIncludedNumbers = function (guess, answer) {
+        var guessedNumbers = guess.getBaseballNumbers();
+        var counts = 0;
+        guessedNumbers.forEach(function (num) {
+            if (answer.isIncluded(num)) {
+                counts += 1;
             }
         });
-        return balls;
+        console.log(counts);
+        return counts;
     };
     return BaseballNumbersComparator;
 }());

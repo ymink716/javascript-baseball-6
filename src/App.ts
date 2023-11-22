@@ -1,4 +1,3 @@
-import { CHOICE_START_NEW_GAME, THREE_STRIKE } from './common/constants';
 import BaseballGameController from './controllers/BaseballGameController';
 
 class App {
@@ -15,9 +14,9 @@ class App {
 
     while (this.isInProgress) {
       await this.baseballGameController.guessNumbers();
-      const result = await this.baseballGameController.judgeResult();
+      const isAnswer = await this.baseballGameController.isAnswer();
       
-      if (result === THREE_STRIKE) {
+      if (isAnswer) {
         const isRegame = await this.baseballGameController.askRegame();
         
         if (isRegame) {

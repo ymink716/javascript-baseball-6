@@ -8,10 +8,12 @@ describe("Answer", () => {
     test("정답 숫자 리스트를 반환한다.", async () => {
       const randoms = [3, 2, 7];
 
-      jest.spyOn(BaseballNumbersGenerator.prototype, 'generateRandomNumbers')
-        .mockReturnValue(randoms);
+      // jest.spyOn(BaseballNumbersGenerator.prototype, 'generateRandomNumbers')
+      //   .mockReturnValue(randoms);
+
+      const generator = TestBaseballNumbersGenerator();
       
-      const answer = new Answer();
+      const answer = new Answer(generator);
       const result = answer.getNumbers();
       
       expect(result).toEqual(randoms);

@@ -1,53 +1,54 @@
 import { ERROR_MESSAGE } from "../../common/constants";
+import BaseballNumber from "./baseballNumber";
 
 class BaseballNumbers {
-  private numbers: number[];
+  private baseballNumbers: BaseballNumber[];
 
-  constructor(numbers: number[]) {
-    if (!this.validate(numbers)) {
+  constructor(baseballNumbers: BaseballNumber[]) {
+    if (!this.validate(baseballNumbers)) {
       throw Error(ERROR_MESSAGE);
     }
 
-    this.numbers = numbers.map(Number);
+    this.baseballNumbers = baseballNumbers;
   }
 
-  private validate(numbers: number[]): boolean {
-    if (this.isThreeLetters(numbers) && this.isNaturalNumber(numbers) && this.isUnique(numbers)) {
+  private validate(baseballNumbers: BaseballNumber[]): boolean {
+    if (this.isThreeLetters(baseballNumbers) && this.isNotDuplicated(baseballNumbers)) {
       return true;
     }
 
     return false;
   }
 
-  private isThreeLetters(numbers: number[]): boolean {
-    return numbers.length === 3;
+  private isThreeLetters(baseballNumbers: BaseballNumber[]): boolean {
+    return baseballNumbers.length === 3;
   }
 
-  private isNaturalNumber(numbers: number[]): boolean {
-    const validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-    const result = numbers.every((num) => {
-      if(validNumbers.includes(num)) {
-        return true;
-      }
-      return false;
-    });
-
-    return result;
-  }
-
-  private isUnique(numbers: number[]): boolean {
-    const [first, second, third] = numbers;
-
-    if (first === second || second === third || third === first) {
+  private isNotDuplicated(baseballNumbers: BaseballNumber[]): boolean {
+    const [first, second, third] = baseballNumbers;
+    
+    if (first.isEqual(second) || second.isEqual(third) || third.isEqual(first)) {
       return false;
     }
-
+    
     return true;
   }
 
-  public getNumbers(): number[] {
-    return this.numbers;
+  public getBaseballNumbers(): BaseballNumber[] {
+    return this.baseballNumbers;
+  }
+
+  public isIncluded(other: BaseballNumber): boolean {
+    let result = false;
+
+    for (let i = 0; i < this.baseballNumbers.length; i++) {
+      if (this.baseballNumbers[i].isEqual(other)) {
+        result = true;
+        break;
+      }
+    }
+
+    return result;
   }
 }
 

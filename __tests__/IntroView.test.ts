@@ -1,6 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import IntroView from "../src/views/IntroView";
-import { INTRO_MESSAGE } from '../src/common/constants';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -10,6 +9,7 @@ const getLogSpy = () => {
 
 describe("IntroView", () => {
   describe("announceBeginning()", () => {
+    const INTRO_MESSAGE = '숫자 야구 게임을 시작합니다.';
     test("게임 시작 메세지를 콘솔에 출력한다.", async () => {
       const logSpy = getLogSpy();
   

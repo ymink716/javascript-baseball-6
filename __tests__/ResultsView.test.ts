@@ -1,5 +1,4 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { CLEER_GAME, NOTHING, THREE_STRIKE } from '../src/common/constants';
 import ResultView from "../src/views/ResultView";
 
 const getLogSpy = () => {

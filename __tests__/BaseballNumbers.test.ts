@@ -1,41 +1,76 @@
 import { ERROR_MESSAGE } from '../src/common/constants';
 import BaseballNumbers from '../src/models/vo/BaseballNumbers';
+import BaseballNumber from '../src/models/vo/baseballNumber';
 
 
 describe("BaseballNumbers", () => {
   describe("constructor()", () => {
     test("길이가 3이 아니라면 Error가 발생한다.", () => {
-      const numbers = [1, 2, 3, 4];
+      const baseballNumbers = [
+        new BaseballNumber(1), 
+        new BaseballNumber(2),  
+        new BaseballNumber(3), 
+        new BaseballNumber(4), 
+      ];
 
-      expect(() => new BaseballNumbers(numbers)).toThrow(ERROR_MESSAGE);
+      expect(() => new BaseballNumbers(baseballNumbers)).toThrow(ERROR_MESSAGE);
     });
 
-    test("1 ~ 9 사이의 값이 아니라면 Error가 발생한다.", () => {
-      const numbers = [1, 0, 9];
+    // test("1 ~ 9 사이의 값이 아니라면 Error가 발생한다.", () => {
+    //   const numbers = [1, 0, 9];
 
-      expect(() => new BaseballNumbers(numbers)).toThrow(ERROR_MESSAGE);
-    });
+    //   expect(() => new BaseballNumbers(numbers)).toThrow(ERROR_MESSAGE);
+    // });
 
     test("3개의 요소 중 중복이 있다면 Error가 발생한다.", () => {
-      const numbers = [1, 1, 2];
+      const baseballNumbers = [
+        new BaseballNumber(1), 
+        new BaseballNumber(1),  
+        new BaseballNumber(3), 
+      ];
 
-      expect(() => new BaseballNumbers(numbers)).toThrow(ERROR_MESSAGE);
+      expect(() => new BaseballNumbers(baseballNumbers)).toThrow(ERROR_MESSAGE);
     });
 
-    test("길이가 3이고 1~9 사이의 중복되지 않는 number 리스트를 멤버로 가진다.", () => {
-      const numbers = [1, 2, 3];
-      const result = new BaseballNumbers(numbers);
+    test("길이가 3이고, 중복되지 않는 BaseballNumber 리스트를 멤버로 가진다.", () => {
+      const baseballNumbers = [
+        new BaseballNumber(1), 
+        new BaseballNumber(2),  
+        new BaseballNumber(3), 
+      ];
+      const result = new BaseballNumbers(baseballNumbers);
 
-      expect(result.getNumbers().length).toBe(3);
+      expect(result.getBaseballNumbers().length).toBe(3);
       
-      const validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-      const [first, second, third] = result.getNumbers();
-      
-      //expect(validNumbers.includes(first)).toBeTruthy();
-      //expect(validNumbers.includes(second)).toBeTruthy();
-      //expect(validNumbers.includes(third)).toBeTruthy();
+      const [first, second, third] = result.getBaseballNumbers();
 
-      //expect(first !== second && second !== third && third !== first).toBeTruthy();
+      expect(first.getBaseballNumber() !== second.getBaseballNumber()).toBeTruthy();
+      expect(second.getBaseballNumber() !== third.getBaseballNumber()).toBeTruthy();
+      expect(third.getBaseballNumber() !== first.getBaseballNumber()).toBeTruthy();
     });
   });
+
+  describe("isIncluded()", () => {
+    test("해당 값이 포함되어 있다면 true를 리턴한다.", () => {
+      const baseballNumbers = new BaseballNumbers([
+        new BaseballNumber(1), 
+        new BaseballNumber(2),  
+        new BaseballNumber(3), 
+      ]);
+      const other = new BaseballNumber(3);
+
+      expect(baseballNumbers.isIncluded(other)).toBeTruthy();
+    });
+
+    test("해당 값이 포함되어 있지 않다면 false를 리턴한다.", () => {
+      const baseballNumbers = new BaseballNumbers([
+        new BaseballNumber(1), 
+        new BaseballNumber(2),  
+        new BaseballNumber(3), 
+      ]);
+      const other = new BaseballNumber(4);
+
+      expect(baseballNumbers.isIncluded(other)).toBeFalsy();
+    });
+  })
 })

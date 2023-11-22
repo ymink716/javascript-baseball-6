@@ -1,9 +1,11 @@
-import { CHOICE_QUIT, CHOICE_START_NEW_GAME, ERROR_MESSAGE } from './../src/common/constants';
+import { ERROR_MESSAGE } from './../src/common/constants';
 import Host from '../src/models/Host';
 
 describe("Host", () => { 
   let host: Host;
-
+  const CHOICE_START_NEW_GAME = '1';
+  const CHOICE_QUIT = '2';
+  
   beforeAll(() => {
     host = new Host();
   });

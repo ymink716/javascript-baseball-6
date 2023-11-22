@@ -1,14 +1,14 @@
-import BaseballNumbersComparator from "./BaseballNumbersComparator";
+import { Comparator } from './interface/Comparator';
 import BaseballNumbers from "./vo/BaseballNumbers";
 
 
 class Referee {
   private readonly NOTHING = '낫싱';
   private readonly THREE_STRIKE = '3스트라이크';
-  private readonly comparator: BaseballNumbersComparator;
+  private readonly comparator: Comparator;
 
-  constructor() {
-    this.comparator = new BaseballNumbersComparator();
+  constructor(comparator: Comparator) {
+    this.comparator = comparator;
   }
 
   public judge(guess: BaseballNumbers, answer: BaseballNumbers): string {

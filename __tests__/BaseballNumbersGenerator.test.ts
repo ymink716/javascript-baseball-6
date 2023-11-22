@@ -7,10 +7,9 @@ describe("BaseballNumbersGenerator", () => {
       const generator = new BaseballNumbersGenerator(new MockRandoms());
       
       const result = generator.generate();
+      const [first, second, third] = result.getBaseballNumbers();
 
       expect(result.getBaseballNumbers().length).toBe(3);
-
-      const [first, second, third] = result.getBaseballNumbers();
       expect(first.getBaseballNumber() !== second.getBaseballNumber()).toBeTruthy();
       expect(second.getBaseballNumber() !== third.getBaseballNumber()).toBeTruthy();
       expect(third.getBaseballNumber() !== first.getBaseballNumber()).toBeTruthy();

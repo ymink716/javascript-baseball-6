@@ -2,10 +2,11 @@ import BaseballNumber from './vo/baseballNumber';
 import BaseballNumbers from './vo/BaseballNumbers';
 import { Randoms } from './interface/Randoms';
 
-class BaseballNumbersGenerator {
-  private readonly RANDOM_NUMBER_START = 1;
-  private readonly RANDOM_NUMBER_END = 9;
-  private readonly RANDOM_NUMBER_COUNT = 3;
+const RANDOM_NUMBER_START = 1;
+const RANDOM_NUMBER_END = 9;
+const RANDOM_NUMBER_COUNT = 3;
+
+class BaseballNumbersGenerator {  
   private readonly randoms: Randoms;
 
   constructor(randoms: Randoms) {
@@ -22,9 +23,9 @@ class BaseballNumbersGenerator {
   private generateRandomNumbers(): number[] {
     const numbers = [];
 
-    while (numbers.length < this.RANDOM_NUMBER_COUNT) {
+    while (numbers.length < RANDOM_NUMBER_COUNT) {
       const randomNumber = this.randoms.generate(
-        this.RANDOM_NUMBER_START, this.RANDOM_NUMBER_END
+        RANDOM_NUMBER_START, RANDOM_NUMBER_END
       );
       
       if (this.isNotIncluded(numbers, randomNumber)) {

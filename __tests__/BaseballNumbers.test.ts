@@ -25,22 +25,6 @@ describe("BaseballNumbers", () => {
 
       expect(() => new BaseballNumbers(baseballNumbers)).toThrow(ERROR_MESSAGE);
     });
-
-    test("길이가 3이고, 중복되지 않는 BaseballNumber 리스트를 멤버로 가진다.", () => {
-      const baseballNumbers = [
-        new BaseballNumber(1), 
-        new BaseballNumber(2),  
-        new BaseballNumber(3), 
-      ];
-      const result = new BaseballNumbers(baseballNumbers);
-
-      expect(result.getBaseballNumbers().length).toBe(3);
-      
-      const [first, second, third] = result.getBaseballNumbers();
-      expect(first.getBaseballNumber() !== second.getBaseballNumber()).toBeTruthy();
-      expect(second.getBaseballNumber() !== third.getBaseballNumber()).toBeTruthy();
-      expect(third.getBaseballNumber() !== first.getBaseballNumber()).toBeTruthy();
-    });
   });
 
   describe("isIncluded()", () => {

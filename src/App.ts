@@ -23,8 +23,9 @@ class App {
 
     while (this.isInProgress) {
       await this.baseballGameController.guessNumbers();
+      await this.baseballGameController.judge();
+
       const isAnswer = await this.baseballGameController.isAnswer();
-      
       if (isAnswer) {
         const isRegame = await this.baseballGameController.askRegame();
         this.isInProgress = isRegame;

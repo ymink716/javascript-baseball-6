@@ -1,37 +1,29 @@
 import { Comparator } from './interface/Comparator';
 import BaseballNumbers from "./vo/BaseballNumbers";
 
+const ANSWER_STRIKE_COUNT = 3;
 
 class Referee {
-  private readonly NOTHING = '낫싱';
-  private readonly THREE_STRIKE = '3스트라이크';
   private readonly comparator: Comparator;
 
   constructor(comparator: Comparator) {
     this.comparator = comparator;
   }
 
-  public judge(guess: BaseballNumbers, answer: BaseballNumbers): string {
-    const strikes = this.comparator.countStrikes(guess, answer);
-    const countIncluded = this.comparator.countIncludedNumbers(guess, answer);
+  public judge(guess: BaseballNumbers, answer: BaseballNumbers): { strike: number, ball: number } {
+    const strike = this.comparator.countStrike(guess, answer);
+    const countIncluded = this.comparator.countIncludedNumber(guess, answer);
 
-    if (this.isNothing(strikes, countIncluded)) {
-      return this.NOTHING;
-    } 
-    
-    if (this.isThreeStrikes(strikes)) {
-      return this.THREE_STRIKE;
+    return {
+      strike,
+      ball: countIncluded - strike,
     }
-    
-    return `${countIncluded - strikes}볼 ${strikes}스트라이크`;
   }
 
-  private isNothing(strikes: number, countIncluded: number): boolean {
-    return strikes === 0 && countIncluded === 0;
-  }
+  public isAnswer(guess: BaseballNumbers, answer: BaseballNumbers): boolean {
+    const strike = this.comparator.countStrike(guess, answer);
 
-  private isThreeStrikes(strikes: number): boolean {
-    return strikes === 3;
+    return strike === ANSWER_STRIKE_COUNT;
   }
 }
 

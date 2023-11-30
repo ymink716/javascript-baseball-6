@@ -17,7 +17,7 @@ describe("BaseballNumbersComparator", () => {
       ]);
 
       const comparator = new BaseballNumbersComparator();
-      const result  = comparator.countStrikes(guess, answer);
+      const result  = comparator.countStrike(guess, answer);
 
       expect(result).toBe(1);
     });
@@ -37,7 +37,7 @@ describe("BaseballNumbersComparator", () => {
       ]);
 
       const comparator = new BaseballNumbersComparator();
-      const result  = comparator.countIncludedNumbers(guess, answer);
+      const result  = comparator.countIncludedNumber(guess, answer);
 
       expect(result).toBe(2);
     });

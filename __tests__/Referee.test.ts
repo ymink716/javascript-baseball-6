@@ -5,9 +5,6 @@ import BaseballNumbers from '../src/models/vo/BaseballNumbers';
 import BaseballNumber from '../src/models/vo/baseballNumber';
 
 describe("Referee", () => {
-  const NOTHING = '낫싱';
-  const THREE_STRIKE = '3스트라이크';
-
   let comparator: Comparator;
   let referee: Referee;
 
@@ -17,7 +14,44 @@ describe("Referee", () => {
   });
 
   describe("judge()", () => {
-    test("스트라이크와 볼이 모두 0개라면 낫싱을 알리는 문구를 리턴한다.", () => {
+    test("스트라이크와 볼 개수를 반환한다.", () => {
+      const guess = new BaseballNumbers([
+        new BaseballNumber(1),
+        new BaseballNumber(2),
+        new BaseballNumber(3),
+      ]);
+      const answer = new BaseballNumbers([
+        new BaseballNumber(1),
+        new BaseballNumber(5),
+        new BaseballNumber(2),
+      ]); 
+
+      const result = referee.judge(guess, answer);
+
+      expect(result.strike).toBe(1);
+      expect(result.ball).toBe(1);
+    });
+  });
+
+  describe("isAnswer()", () => {
+    test("추측과 정답이 같다면 true를 리턴한다.", () => {
+      const guess = new BaseballNumbers([
+        new BaseballNumber(1),
+        new BaseballNumber(2),
+        new BaseballNumber(3),
+      ]);
+      const answer = new BaseballNumbers([
+        new BaseballNumber(1),
+        new BaseballNumber(2),
+        new BaseballNumber(3),
+      ]);
+
+      const result = referee.isAnswer(guess, answer);
+  
+      expect(result).toBeTruthy();
+    });
+
+    test("추측과 정답이 다르다면 false를 리턴한다.", () => {
       const guess = new BaseballNumbers([
         new BaseballNumber(1),
         new BaseballNumber(2),
@@ -27,49 +61,11 @@ describe("Referee", () => {
         new BaseballNumber(4),
         new BaseballNumber(5),
         new BaseballNumber(6),
-      ]); 
+      ])
 
-      const result = referee.judge(guess, answer);
-
-      expect(result).toBe(NOTHING);
-    });
-
-    test("스트라이크가 3개라면 3스트라이크를 알리는 문구를 리턴한다.", () => {
-      const guess = new BaseballNumbers([
-        new BaseballNumber(1),
-        new BaseballNumber(2),
-        new BaseballNumber(3),
-      ]);
-      const answer = new BaseballNumbers([
-        new BaseballNumber(1),
-        new BaseballNumber(2),
-        new BaseballNumber(3),
-      ]); 
-
-      const result = referee.judge(guess, answer);
-
-      expect(result).toBe(THREE_STRIKE);
-    });
-
-    test("낫싱도 3스트라이크도 아니라면 볼과 스트라이크의 개수를 알려주는 문구를 리턴한다.", () => {
-      const guessdNumbers = [1, 2, 3];
-      const answerNumbers = [1, 3, 5];
-      const guess = new BaseballNumbers([
-        new BaseballNumber(1),
-        new BaseballNumber(2),
-        new BaseballNumber(3),
-      ]);
-      const answer = new BaseballNumbers([
-        new BaseballNumber(1),
-        new BaseballNumber(3),
-        new BaseballNumber(5),
-      ]); 
-      const strikes = 1;
-      const balls = 1;
-
-      const result = referee.judge(guess, answer);
-
-      expect(result).toBe(`${balls}볼 ${strikes}스트라이크`);
+      const result = referee.isAnswer(guess, answer);
+  
+      expect(result).toBeFalsy();
     });
   })
 });

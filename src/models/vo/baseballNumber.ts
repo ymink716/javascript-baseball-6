@@ -22,7 +22,7 @@ class BaseballNumber {
   }
 
   public isEqual(other: BaseballNumber) {
-    return this.getBaseballNumber() === other.getBaseballNumber();
+    return this.baseballNumber === other.getBaseballNumber();
   }
 }
 

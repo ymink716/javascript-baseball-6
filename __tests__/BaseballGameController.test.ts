@@ -11,6 +11,7 @@ import BaseballNumbersComparator from '../src/models/BaseballNumbersComparator';
 import { Randoms } from '../src/models/interface/Randoms';
 import BaseballNumbers from '../src/models/vo/BaseballNumbers';
 import BaseballNumber from '../src/models/vo/baseballNumber';
+import ResultView from '../src/views/ResultView';
 
 describe("BaseballGameController", () => {
   let baseballGameController: BaseballGameController;
@@ -54,7 +55,7 @@ describe("BaseballGameController", () => {
       expect(GusessView.guessNumbers).toHaveBeenCalled();
     });
 
-    test("view에서 입력받은 값으로 baseballNumbers를 생성한다.", async () => {
+    test("view에서 입력받은 값으로 추측값을 생성한다.", async () => {
       const numbers = [1, 2, 3];
       jest.spyOn(GusessView, 'guessNumbers').mockImplementationOnce(async () => numbers);
       
@@ -64,8 +65,8 @@ describe("BaseballGameController", () => {
     });
   });
 
-  describe("isAnswer()", () => {
-    test("추측과 정답이 같다면 true를 리턴한다.", async () => {
+  describe("judge()", () => {
+    test("모델에 정답값과 추측값으로 스트라이크, 볼 여부를 판단하개 한다.", async () => {
       baseballGameController['guess'] = new BaseballNumbers([
         new BaseballNumber(1),
         new BaseballNumber(2),
@@ -76,27 +77,55 @@ describe("BaseballGameController", () => {
         new BaseballNumber(2),
         new BaseballNumber(3),
       ]);
+      jest.spyOn(referee, 'judge');
+      
+      await baseballGameController.judge();
 
-      const result = await baseballGameController.isAnswer();
-  
-      expect(result).toBeTruthy();
+      expect(referee.judge).toHaveBeenCalledWith(
+        baseballGameController['guess'],
+        baseballGameController['answer'],
+      );
     });
 
-    test("추측과 정답이 다르다면 false를 리턴한다.", async () => {
+    test("판단 결과를 나타내는 뷰를 생성한다.", async () => {
       baseballGameController['guess'] = new BaseballNumbers([
         new BaseballNumber(1),
         new BaseballNumber(2),
         new BaseballNumber(3),
       ]);
       baseballGameController['answer'] = new BaseballNumbers([
-        new BaseballNumber(4),
-        new BaseballNumber(5),
-        new BaseballNumber(6),
+        new BaseballNumber(1),
+        new BaseballNumber(2),
+        new BaseballNumber(3),
       ]);
+      jest.spyOn(ResultView.prototype, 'printResult');
 
-      const result = await baseballGameController.isAnswer();
-  
-      expect(result).toBeFalsy();
+      await baseballGameController.judge();
+
+      expect(ResultView.prototype.printResult).toHaveBeenCalled();
+    });
+  })
+
+  describe("isAnswer()", () => {
+    test("모델에 정답값과 추측값으로 정답이 맞는지 확인하는 로직을 호출한다.", async () => {
+      baseballGameController['guess'] = new BaseballNumbers([
+        new BaseballNumber(1),
+        new BaseballNumber(2),
+        new BaseballNumber(3),
+      ]);
+      baseballGameController['answer'] = new BaseballNumbers([
+        new BaseballNumber(1),
+        new BaseballNumber(2),
+        new BaseballNumber(3),
+      ]);
+      jest.spyOn(referee, 'isAnswer');
+      
+      await baseballGameController.isAnswer();
+
+      expect(referee.isAnswer).toHaveBeenCalledWith(
+        baseballGameController['guess'],
+        baseballGameController['answer'],
+      );
     });
   });
 
@@ -110,7 +139,8 @@ describe("BaseballGameController", () => {
     });
 
     test("새 게임을 시작한다면 true를 반환한다.", async () => {
-      jest.spyOn(RegameView, 'askRegame').mockResolvedValueOnce('1');
+      const CHOICE_START_NEW_GAME = '1';
+      jest.spyOn(RegameView, 'askRegame').mockResolvedValueOnce(CHOICE_START_NEW_GAME);
       
       const result = await baseballGameController.askRegame();
 
@@ -118,7 +148,8 @@ describe("BaseballGameController", () => {
     });
 
     test("새 게임을 시작하지 않는다면 false를 반환한다.", async () => {
-      jest.spyOn(RegameView, 'askRegame').mockResolvedValueOnce('2');
+      const CHOICE_QUIT = '2';
+      jest.spyOn(RegameView, 'askRegame').mockResolvedValueOnce(CHOICE_QUIT);
       
       const result = await baseballGameController.askRegame();
 

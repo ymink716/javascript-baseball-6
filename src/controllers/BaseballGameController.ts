@@ -7,7 +7,6 @@ import Host from '../models/Host';
 import BaseballNumbers from '../models/vo/BaseballNumbers';
 import BaseballNumbersGenerator from '../models/BaseballNumbersGenerator';
 import BaseballNumber from '../models/vo/baseballNumber';
-import { THREE_STRIKE } from '../common/constants';
 
 class BaseballGameController {  
   private answer: BaseballNumbers;
@@ -40,13 +39,15 @@ class BaseballGameController {
     this.guess = new BaseballNumbers(guess);
   }
 
-  public async isAnswer(): Promise<boolean> {
-    const result = this.referee.judge(this.guess, this.answer);
+  public async judge(): Promise<void> {
+    const { strike, ball } = this.referee.judge(this.guess, this.answer);
 
-    const resultView = new ResultView(result);
+    const resultView = new ResultView(strike, ball);
     resultView.printResult();
+  }
 
-    return result === THREE_STRIKE;
+  public async isAnswer(): Promise<boolean> {
+    return this.referee.isAnswer(this.guess, this.answer);
   }
 
   public async askRegame(): Promise<boolean> {

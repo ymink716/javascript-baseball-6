@@ -2,10 +2,10 @@ import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from '../common/constants';
 
 class GusessView {
-  static ENTER_NUMBERS = '숫자를 입력해주세요 : ';
+  static ENTER_NUMBER_MESSAGE = '숫자를 입력해주세요 : ';
 
   static async guessNumbers(): Promise<number[]> {
-    const userInput = await Console.readLineAsync(this.ENTER_NUMBERS);
+    const userInput = await Console.readLineAsync(this.ENTER_NUMBER_MESSAGE);
     const numbers = userInput.split("");
 
     try {

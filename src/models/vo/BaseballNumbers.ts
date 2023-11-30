@@ -1,6 +1,8 @@
 import { ERROR_MESSAGE } from "../../common/constants";
 import BaseballNumber from "./baseballNumber";
 
+const BASEBALL_NUMBERS_LENGTH = 3;
+
 class BaseballNumbers {
   private baseballNumbers: BaseballNumber[];
 
@@ -21,7 +23,7 @@ class BaseballNumbers {
   }
 
   private isThreeLetters(baseballNumbers: BaseballNumber[]): boolean {
-    return baseballNumbers.length === 3;
+    return baseballNumbers.length === BASEBALL_NUMBERS_LENGTH;
   }
 
   private isNotDuplicated(baseballNumbers: BaseballNumber[]): boolean {
